@@ -27,6 +27,5 @@ A coding exercise with the goal of creating a basic UI component using React to 
 
 ## How to execute this project
 1. Navigate to the folder in terminal and run `npm run start`.
-3. Run `open index.html`.
 
 ## Post-Project Thoughts

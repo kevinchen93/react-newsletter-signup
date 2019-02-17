@@ -127,7 +127,7 @@ class SignupForm extends React.Component {
         </div>
       )
     }
-    
+
     return (
       <div>
         {inputElements}
@@ -149,20 +149,14 @@ class SignupForm extends React.Component {
                           : (this.state.isEmailValid && !this.state.isNameValid) ? this.validateName
                           : '';
 
-    if (this.state.isEmailValid && this.state.isNameValid) {
-      return (
-        <p>Look out for the latest news on your favorite shows.</p>
-      )
-    } else {
-      return (
-        <input
-          type="submit"
-          value={ buttonText }
-          onClick={ validateHandler }
-          className="btn-submit"
-        />
-      )
-    }
+    return (
+      <input
+        type="submit"
+        value={ buttonText }
+        onClick={ validateHandler }
+        className="btn-submit"
+      />
+    )
   }
 
   renderErrors() {
@@ -195,13 +189,17 @@ class SignupForm extends React.Component {
                 type="checkbox"
                 value="policy"
                 onChange={ () => console.log('Checked!') }
-                />
+              />
               <p>I agree to receive information from Discovery Communications in accordance with the following <a href="google.com">Privacy Policy</a>
               </p>
             </div>
           }
           {this.renderButton()}
         </form>
+        {
+          this.state.isEmailValid && this.state.isNameValid &&
+          <p>Look out for the latest news on your favorite shows.</p>
+        }
       </div>
     )
   }
