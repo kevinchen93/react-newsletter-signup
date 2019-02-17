@@ -23,40 +23,37 @@ class SignupForm extends React.Component {
     });
   }
 
-  renderErrors() {
-    return (
-      <ul>
-        {this.state.errors.map((error, i) => (
-          <li key={`error-${i}`}>
-            {error}
-          </li>
-        ))}
-      </ul>
-    );
-  }
-
   validateEmail(e) {
     e.preventDefault();
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const isEmailValid = re.test(String(this.state.email));
     const errors = [];
-
+    const errorMessages = {
+      'invalidEmail': 'Email cannot be blank.',
+      'validEmail': 'Please enter a valid email.'
+    }
     if (!isEmailValid) {
       if (this.state.email.length === 0) {
-        errors.push('Email cannot be blank.');
+        errors.push(`${errorMessages['invalidEmail']}`);
       } else {
-        errors.push('Please enter a valid email.');
+        errors.push(`${errorMessages['validEmail']}`);
       }
     }
 
-    this.setState({ isEmailValid: isEmailValid, errors: errors}, () => console.log('CURRENT STATE AFTER PRESSING NEXT: ', this.state));
+    this.setState(
+      { isEmailValid: isEmailValid, errors: errors},
+      () => console.log('CURRENT STATE AFTER PRESSING NEXT: ', this.state)
+    );
   }
 
   validateName(e) {
     e.preventDefault();
-    const isNameValid = this.state.firstName.match(/[A-Z]/i) && this.state.lastName.match(/[A-Z]/i);
+    const re = /[A-Z]/i;
+    const isNameValid = re.test(String(this.state.firstName)) && re.test(String(this.state.lastName));
+    console.log('isNameValid BOOLEAN: ', isNameValid);
+    console.log('IS BLANK AS FIRST NAME VALID?', this.state.firstName.match(/[A-Z]/i));
+    console.log('IS BLANK AS LAST NAME VALID?', this.state.lastName.match(/[A-Z]/i));
     const errors = [];
-    const fullName = `${this.state.firstName} ${this.state.lastName}`;
     const errorMessages = {
       'firstName': 'First name cannot be blank.',
       'lastName': 'Last name cannot be blank.',
@@ -73,11 +70,14 @@ class SignupForm extends React.Component {
       }
     }
 
-    this.setState({ isNameValid: isNameValid, errors: errors}, () => console.log('CURRENT STATE AFTER PRESSING SIGN UP: ', this.state));
+    this.setState(
+      { isNameValid: isNameValid, errors: errors},
+      () => console.log('CURRENT STATE AFTER PRESSING SIGN UP: ', this.state)
+    );
   }
 
   renderHeader() {
-    // depending on state, renders either email input or first/last name inputs, or success
+    // depending on state, renders header text
     const headerText = (!this.state.isEmailValid && !this.state.isNameValid) ? 'Sign up for the TLC Newsletter.'.toUpperCase()
                     : (this.state.isEmailValid && !this.state.isNameValid) ? 'Almost done! Please enter your first and last name.'.toUpperCase()
                     : 'Thank you for signing up!';
@@ -88,9 +88,10 @@ class SignupForm extends React.Component {
   }
 
   renderInputs() {
-    // depending on state, renders either email input or first/last name inputs, or success
+    // depending on state, renders either email input or first/last name inputs
+    let inputElements;
     if (!this.state.isEmailValid && !this.state.isNameValid) {
-      return (
+      inputElements = (
         <label>
           <input
             type="text"
@@ -102,7 +103,7 @@ class SignupForm extends React.Component {
         </label>
       )
     } else if (this.state.isEmailValid && !this.state.isNameValid) {
-      return(
+      inputElements = (
         <div>
           <label>
             <input
@@ -126,12 +127,21 @@ class SignupForm extends React.Component {
         </div>
       )
     }
+    
+    return (
+      <div>
+        {inputElements}
+        <div className="errors-container">
+          {this.renderErrors()}
+        </div>
+      </div>
+    )
   }
 
   renderButton() {
-    // depending on state, renders button text
-    const buttonText = (!this.state.isEmailValid && !this.state.isNameValid) ? 'Next'
-                      : (this.state.isEmailValid && !this.state.isNameValid) ? 'Sign Up'
+    // depending on state, renders button text or successful signup text (not sure if this should be placed here or elsewhere)
+    const buttonText = (!this.state.isEmailValid && !this.state.isNameValid) ? 'Next'.toUpperCase()
+                      : (this.state.isEmailValid && !this.state.isNameValid) ? 'Sign Up'.toUpperCase()
                       : '';
 
     // depending on state, renders validate handler
@@ -155,6 +165,18 @@ class SignupForm extends React.Component {
     }
   }
 
+  renderErrors() {
+    return (
+      <ul>
+        {this.state.errors.map((error, i) => (
+          <li key={`error-${i}`}>
+            {error}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     console.log('SUBMIT CLICKED');
@@ -164,7 +186,7 @@ class SignupForm extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={ this.handleSubmit }>
           {this.renderHeader()}
           {this.renderInputs()}
           {!this.state.isEmailValid &&
@@ -180,9 +202,6 @@ class SignupForm extends React.Component {
           }
           {this.renderButton()}
         </form>
-        <div className="errors-container">
-          {this.renderErrors()}
-        </div>
       </div>
     )
   }

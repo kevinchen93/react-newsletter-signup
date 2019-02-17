@@ -3,10 +3,10 @@ A coding exercise with the goal of creating a basic UI component using React to 
 
 ## Requirements
 1. Must use React JS to complete the project.
-2. Must build and run in either a web browser.
+2. Must build and run in a web browser.
 3. Must include a Readme file for instructions for running the application.
 4. May use third party libraries to complete this task.
-5. Organize your component in a way that shows you have a good understanding of react architectural principles and reuse.
+5. Organize your component in a way that shows you have a good understanding of React architectural principles and reuse.
 6. The component will have 4 responsive breakpoints as shown in figma file:
     * Mobile
     * Tablet Portrait
