@@ -15,6 +15,7 @@ class SignupForm extends React.Component {
     this.update = this.update.bind(this);
     this.validateEmail = this.validateEmail.bind(this);
     this.validateName = this.validateName.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   update(field) {
@@ -50,9 +51,6 @@ class SignupForm extends React.Component {
     e.preventDefault();
     const re = /[A-Z]/i;
     const isNameValid = re.test(String(this.state.firstName)) && re.test(String(this.state.lastName));
-    console.log('isNameValid BOOLEAN: ', isNameValid);
-    console.log('IS BLANK AS FIRST NAME VALID?', this.state.firstName.match(/[A-Z]/i));
-    console.log('IS BLANK AS LAST NAME VALID?', this.state.lastName.match(/[A-Z]/i));
     const errors = [];
     const errorMessages = {
       'firstName': 'First name cannot be blank.',
@@ -78,9 +76,15 @@ class SignupForm extends React.Component {
 
   renderHeader() {
     // depending on state, renders header text
-    const headerText = (!this.state.isEmailValid && !this.state.isNameValid) ? 'Sign up for the TLC Newsletter.'.toUpperCase()
-                    : (this.state.isEmailValid && !this.state.isNameValid) ? 'Almost done! Please enter your first and last name.'.toUpperCase()
-                    : 'Thank you for signing up!';
+    const headerMessages = {
+      'invalidEmail': `${'Sign up for the TLC Newsletter.'.toUpperCase()}`,
+      'invalidName': `${'Almost done! Please enter your first and last name.'.toUpperCase()}`,
+      'successfulSignUp': 'Thank You For Signing Up!',
+    };
+
+    const headerText = (!this.state.isEmailValid && !this.state.isNameValid) ? headerMessages['invalidEmail']
+                    : (this.state.isEmailValid && !this.state.isNameValid) ? headerMessages['invalidName']
+                    : headerMessages['successfulSignUp'];
 
     return (
       <h1>{ headerText }</h1>
@@ -89,9 +93,8 @@ class SignupForm extends React.Component {
 
   renderInputs() {
     // depending on state, renders either email input or first/last name inputs
-    let inputElements;
-    if (!this.state.isEmailValid && !this.state.isNameValid) {
-      inputElements = (
+    const inputElements = (!this.state.isEmailValid && !this.state.isNameValid) ?
+      (
         <label>
           <input
             type="text"
@@ -101,9 +104,8 @@ class SignupForm extends React.Component {
             placeholder="enter email address"
             />
         </label>
-      )
-    } else if (this.state.isEmailValid && !this.state.isNameValid) {
-      inputElements = (
+      ) : (this.state.isEmailValid && !this.state.isNameValid) ?
+      (
         <div>
           <label>
             <input
@@ -125,8 +127,7 @@ class SignupForm extends React.Component {
               />
           </label>
         </div>
-      )
-    }
+      ) : null;
 
     return (
       <div>
@@ -139,24 +140,23 @@ class SignupForm extends React.Component {
   }
 
   renderButton() {
-    // depending on state, renders button text or successful signup text (not sure if this should be placed here or elsewhere)
-    const buttonText = (!this.state.isEmailValid && !this.state.isNameValid) ? 'Next'.toUpperCase()
-                      : (this.state.isEmailValid && !this.state.isNameValid) ? 'Sign Up'.toUpperCase()
-                      : '';
-
-    // depending on state, renders validate handler
-    const validateHandler = (!this.state.isEmailValid && !this.state.isNameValid) ? this.validateEmail
-                          : (this.state.isEmailValid && !this.state.isNameValid) ? this.validateName
-                          : '';
-
-    return (
-      <input
-        type="submit"
-        value={ buttonText }
-        onClick={ validateHandler }
-        className="btn-submit"
-      />
-    )
+    return (!this.state.isEmailValid) ?
+      (
+        <input
+          type="submit"
+          value="Next"
+          onClick={ this.validateEmail }
+          className="btn-submit"
+        />
+      ) : (this.state.isEmailValid && !this.state.isNameValid) ?
+      (
+        <input
+          type="submit"
+          value="Sign Up"
+          onClick={ this.validateName }
+          className="btn-submit"
+        />
+      ) : null;
   }
 
   renderErrors() {
@@ -196,8 +196,7 @@ class SignupForm extends React.Component {
           }
           {this.renderButton()}
         </form>
-        {
-          this.state.isEmailValid && this.state.isNameValid &&
+        {this.state.isEmailValid && this.state.isNameValid &&
           <p>Look out for the latest news on your favorite shows.</p>
         }
       </div>

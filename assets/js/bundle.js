@@ -190,6 +190,7 @@ function (_React$Component) {
     _this.update = _this.update.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.validateEmail = _this.validateEmail.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.validateName = _this.validateName.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -239,9 +240,6 @@ function (_React$Component) {
       e.preventDefault();
       var re = /[A-Z]/i;
       var isNameValid = re.test(String(this.state.firstName)) && re.test(String(this.state.lastName));
-      console.log('isNameValid BOOLEAN: ', isNameValid);
-      console.log('IS BLANK AS FIRST NAME VALID?', this.state.firstName.match(/[A-Z]/i));
-      console.log('IS BLANK AS LAST NAME VALID?', this.state.lastName.match(/[A-Z]/i));
       var errors = [];
       var errorMessages = {
         'firstName': 'First name cannot be blank.',
@@ -270,39 +268,37 @@ function (_React$Component) {
     key: "renderHeader",
     value: function renderHeader() {
       // depending on state, renders header text
-      var headerText = !this.state.isEmailValid && !this.state.isNameValid ? 'Sign up for the TLC Newsletter.'.toUpperCase() : this.state.isEmailValid && !this.state.isNameValid ? 'Almost done! Please enter your first and last name.'.toUpperCase() : 'Thank you for signing up!';
+      var headerMessages = {
+        'invalidEmail': "".concat('Sign up for the TLC Newsletter.'.toUpperCase()),
+        'invalidName': "".concat('Almost done! Please enter your first and last name.'.toUpperCase()),
+        'successfulSignUp': 'Thank You For Signing Up!'
+      };
+      var headerText = !this.state.isEmailValid && !this.state.isNameValid ? headerMessages['invalidEmail'] : this.state.isEmailValid && !this.state.isNameValid ? headerMessages['invalidName'] : headerMessages['successfulSignUp'];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, headerText);
     }
   }, {
     key: "renderInputs",
     value: function renderInputs() {
       // depending on state, renders either email input or first/last name inputs
-      var inputElements;
-
-      if (!this.state.isEmailValid && !this.state.isNameValid) {
-        inputElements = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "text",
-          value: this.state.email,
-          onChange: this.update('email'),
-          className: "",
-          placeholder: "enter email address"
-        }));
-      } else if (this.state.isEmailValid && !this.state.isNameValid) {
-        inputElements = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "text",
-          value: this.state.firstName,
-          onChange: this.update('firstName'),
-          className: "",
-          placeholder: "First Name"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "text",
-          value: this.state.lastName,
-          onChange: this.update('lastName'),
-          className: "",
-          placeholder: "Last Name"
-        })));
-      }
-
+      var inputElements = !this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.email,
+        onChange: this.update('email'),
+        className: "",
+        placeholder: "enter email address"
+      })) : this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.firstName,
+        onChange: this.update('firstName'),
+        className: "",
+        placeholder: "First Name"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.lastName,
+        onChange: this.update('lastName'),
+        className: "",
+        placeholder: "Last Name"
+      }))) : null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, inputElements, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "errors-container"
       }, this.renderErrors()));
@@ -310,16 +306,17 @@ function (_React$Component) {
   }, {
     key: "renderButton",
     value: function renderButton() {
-      // depending on state, renders button text or successful signup text (not sure if this should be placed here or elsewhere)
-      var buttonText = !this.state.isEmailValid && !this.state.isNameValid ? 'Next'.toUpperCase() : this.state.isEmailValid && !this.state.isNameValid ? 'Sign Up'.toUpperCase() : ''; // depending on state, renders validate handler
-
-      var validateHandler = !this.state.isEmailValid && !this.state.isNameValid ? this.validateEmail : this.state.isEmailValid && !this.state.isNameValid ? this.validateName : '';
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      return !this.state.isEmailValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
-        value: buttonText,
-        onClick: validateHandler,
+        value: "Next",
+        onClick: this.validateEmail,
         className: "btn-submit"
-      });
+      }) : this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "submit",
+        value: "Sign Up",
+        onClick: this.validateName,
+        className: "btn-submit"
+      }) : null;
     }
   }, {
     key: "renderErrors",
