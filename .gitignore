@@ -41,8 +41,8 @@ Temporary Items
 /lib/bundler/man/
 
 ## Webpack:
-bundle.js
-bundle.js.map
+assets/js/bundle.js
+assets/js/bundle.js.map
 
 ### Node ###
 
