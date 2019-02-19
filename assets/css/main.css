@@ -1,0 +1,31 @@
+* {
+  transition: 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+body {
+  transition: 0s;
+  font-family: 'Open Sans', monospace;
+  font-size: 16px;
+  margin: 0;
+  background-color: #120f23;
+}
+.abs-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.rela-block {
+  display: block;
+  position: relative;
+}
+.rela-inline {
+  display: inline-block;
+  position: relative;
+}
+input {
+  width: auto;
+  &:focus {
+    outline: none;
+  }
+}

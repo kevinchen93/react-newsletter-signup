@@ -1,0 +1,12 @@
+.layout {
+  min-height: 100vh;
+  transition: 0s;
+}
+.btn-submit {
+  background: #ed1f34;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background: yellow;
+  }
+}
