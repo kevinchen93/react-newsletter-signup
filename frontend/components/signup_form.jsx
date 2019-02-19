@@ -82,12 +82,15 @@ class SignupForm extends React.Component {
       'successfulSignUp': 'Thank You For Signing Up!',
     };
 
-    const headerText = (!this.state.isEmailValid && !this.state.isNameValid) ? headerMessages['invalidEmail']
+    const firstHeader = (this.state.isEmailValid && this.state.isNameValid) ? 'congratulations' : 'Join the list';
+    const secondHeader = (!this.state.isEmailValid && !this.state.isNameValid) ? headerMessages['invalidEmail']
                     : (this.state.isEmailValid && !this.state.isNameValid) ? headerMessages['invalidName']
                     : headerMessages['successfulSignUp'];
-
     return (
-      <h1>{ headerText }</h1>
+      <div className="form-header">
+        <h1 className="first-header abs-center">{ firstHeader }</h1>
+        <h1 className="second-header">{ secondHeader }</h1>
+      </div>
     )
   }
 
@@ -95,18 +98,20 @@ class SignupForm extends React.Component {
     // depending on state, renders either email input or first/last name inputs
     const inputElements = (!this.state.isEmailValid && !this.state.isNameValid) ?
       (
-        <label>
-          <input
-            type="text"
-            value={this.state.email}
-            onChange={this.update('email')}
-            className=""
-            placeholder="enter email address"
-            />
-        </label>
+        <div className="input-container">
+          <label>
+            <input
+              type="text"
+              value={this.state.email}
+              onChange={this.update('email')}
+              className=""
+              placeholder="enter email address"
+              />
+          </label>
+        </div>
       ) : (this.state.isEmailValid && !this.state.isNameValid) ?
       (
-        <div>
+        <div className="input-container">
           <label>
             <input
               type="text"
@@ -179,26 +184,29 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={ this.handleSubmit }>
-          {this.renderHeader()}
-          {this.renderInputs()}
-          {!this.state.isEmailValid &&
-            <div>
-              <input
-                type="checkbox"
-                value="policy"
-                onChange={ () => console.log('Checked!') }
-              />
-              <p>I agree to receive information from Discovery Communications in accordance with the following <a href="google.com">Privacy Policy</a>
+      <div className="form-container">
+        <div className="gutter-container">
+          <form className="signup-form" onSubmit={ this.handleSubmit }>
+            {this.renderHeader()}
+            {this.renderInputs()}
+            {this.renderButton()}
+            {!this.state.isEmailValid &&
+              <div className="rela-inline checkbox-container">
+                <input
+                  type="checkbox"
+                  value="policy"
+                  className=""
+                  onChange={ () => console.log('Checked!') }
+                  />
+                <p className="rela-inline">I agree to receive information from Discovery Communications in accordance with the following <a href="google.com">Privacy Policy</a>
               </p>
             </div>
           }
-          {this.renderButton()}
         </form>
         {this.state.isEmailValid && this.state.isNameValid &&
-          <p>Look out for the latest news on your favorite shows.</p>
+          <p className="rela-inline">Look out for the latest news on your favorite shows.</p>
         }
+        </div>
       </div>
     )
   }

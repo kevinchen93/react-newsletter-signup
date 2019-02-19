@@ -1,12 +1,191 @@
-.layout {
-  min-height: 100vh;
-  transition: 0s;
-}
-.btn-submit {
-  background: #ed1f34;
-  border-radius: 5px;
-  cursor: pointer;
-  &:hover {
-    background: yellow;
+// Mobile
+@media only screen and (min-width : 320px) and (max-device-width : 480px) {
+  .layout {
+    min-height: 100vh;
+    transition: 0s;
   }
+  .form-container {
+    text-align: center;
+  }
+  .gutter-container {
+    width: 100%;
+    padding: 0 30px;
+    // max-width: 1000px;
+    margin: 0 auto;
+  }
+  form {
+    margin: 0 auto;
+    // max-width: 280px;
+  }
+  .form-header {
+    max-width: 30%;
+    margin: 0 auto;
+    padding: 70px 30px 0 30px;
+    .first-header {
+      max-width: 15%;
+      top: 11%;
+      color: #b6fdbf;
+      font-size: 36px;
+      line-height: 59px;
+      text-align: left;
+    }
+    .second-header {
+      padding: 0 7px;
+      color: #94aebf;
+      font-weight: bold;
+      line-height: 20px;
+      margin-bottom: 12px;
+    }
+  }
+  .signup-form {
+    input[type="text"] {
+      width: 100%;
+      background: #fff;
+      mix-blend-mode: normal;
+      background-color: hsla(0,0%,100%,.1);
+      border: 1px solid hsla(0,0%,100%,.01);
+      border-radius: 5px;
+      line-height: 32px;
+      font-size: 14px;
+      font-weight: 300;
+      padding: 6px 12px;
+      outline: none;
+      &:hover {
+        outline: none;
+        color: hsla(0,0%,100%,.8);
+
+      }
+      &::placeholder {
+        color: #94aebf;
+        opacity: 0.4;
+      }
+    }
+  }
+  .errors-container {
+    margin: 5px 0;
+    font-size: 12px;
+    color: red;
+  }
+  .checkbox-container {
+    display: flex;
+    input[type="checkbox"] {
+    }
+    p {
+      font-weight: 300;
+      padding-left: 5px;
+      line-height: 14px;
+      color: #888888;
+      text-align: left;
+    }
+  }
+  .btn-submit {
+    width: 100%;
+    color: #fff;
+    background: #ed1f34;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    line-height: 32px;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+// Tablet Portrait and Landscape
+@media only screen and (min-width : 768px) and (max-device-width : 1024px) {
+  .layout {
+    min-height: 100vh;
+    transition: 0s;
+  }
+  .form-container {
+    text-align: center;
+  }
+  .gutter-container {
+    width: 100%;
+    padding: 0 30px;
+    // max-width: 1000px;
+    margin: 0 auto;
+  }
+  form {
+    margin: 0 auto;
+    // max-width: 280px;
+  }
+  .form-header {
+    max-width: 30%;
+    margin: 0 auto;
+    padding: 70px 30px 0 30px;
+    .first-header {
+      max-width: 15%;
+      top: 11%;
+      color: #b6fdbf;
+      font-size: 36px;
+      line-height: 59px;
+      text-align: left;
+    }
+    .second-header {
+      padding: 0 7px;
+      color: #94aebf;
+      font-weight: bold;
+      line-height: 20px;
+      margin-bottom: 12px;
+    }
+  }
+  .signup-form {
+    input[type="text"] {
+      width: 100%;
+      background: #fff;
+      mix-blend-mode: normal;
+      background-color: hsla(0,0%,100%,.1);
+      border: 1px solid hsla(0,0%,100%,.01);
+      border-radius: 5px;
+      line-height: 32px;
+      font-size: 14px;
+      font-weight: 300;
+      padding: 6px 12px;
+      outline: none;
+      &:hover {
+        outline: none;
+        color: hsla(0,0%,100%,.8);
+
+      }
+      &::placeholder {
+        color: #94aebf;
+        opacity: 0.4;
+      }
+    }
+  }
+  .errors-container {
+    margin: 5px 0;
+    font-size: 12px;
+    color: red;
+  }
+  .checkbox-container {
+    display: flex;
+    input[type="checkbox"] {
+    }
+    p {
+      font-weight: 300;
+      padding-left: 5px;
+      line-height: 14px;
+      color: #888888;
+      text-align: left;
+    }
+  }
+  .btn-submit {
+    width: 100%;
+    color: #fff;
+    background: #ed1f34;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    line-height: 32px;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+// Desktop
+@media only screen and (min-width : 1224px) {
 }

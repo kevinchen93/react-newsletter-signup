@@ -3,11 +3,18 @@
   box-sizing: border-box;
 }
 body {
+  height: 100vh;
   transition: 0s;
   font-family: 'Open Sans', monospace;
   font-size: 16px;
   margin: 0;
   background-color: #120f23;
+}
+a {
+  color: inherit;
+}
+a:hover {
+  cursor: pointer;
 }
 .abs-center {
   position: absolute;
@@ -25,7 +32,13 @@ body {
 }
 input {
   width: auto;
-  &:focus {
-    outline: none;
-  }
+  background: #fff;
+  color: #94aebf;
+  mix-blend-mode: normal;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  box-shadow: none;
+}
+input:focus {
+  outline: none;
 }

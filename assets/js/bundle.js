@@ -306,20 +306,31 @@ function (_React$Component) {
         'invalidName': "".concat('Almost done! Please enter your first and last name.'.toUpperCase()),
         'successfulSignUp': 'Thank You For Signing Up!'
       };
-      var headerText = !this.state.isEmailValid && !this.state.isNameValid ? headerMessages['invalidEmail'] : this.state.isEmailValid && !this.state.isNameValid ? headerMessages['invalidName'] : headerMessages['successfulSignUp'];
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, headerText);
+      var firstHeader = this.state.isEmailValid && this.state.isNameValid ? 'congratulations' : 'Join the list';
+      var secondHeader = !this.state.isEmailValid && !this.state.isNameValid ? headerMessages['invalidEmail'] : this.state.isEmailValid && !this.state.isNameValid ? headerMessages['invalidName'] : headerMessages['successfulSignUp'];
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "first-header abs-center"
+      }, firstHeader), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "second-header"
+      }, secondHeader));
     }
   }, {
     key: "renderInputs",
     value: function renderInputs() {
       // depending on state, renders either email input or first/last name inputs
-      var inputElements = !this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      var inputElements = !this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.email,
         onChange: this.update('email'),
         className: "",
         placeholder: "enter email address"
-      })) : this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }))) : this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.firstName,
         onChange: this.update('firstName'),
@@ -370,17 +381,29 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "gutter-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "signup-form",
         onSubmit: this.handleSubmit
-      }, this.renderHeader(), this.renderInputs(), !this.state.isEmailValid && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, this.renderHeader(), this.renderInputs(), this.renderButton(), !this.state.isEmailValid && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "rela-inline checkbox-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "checkbox",
         value: "policy",
+        className: "",
         onChange: function onChange() {
           return console.log('Checked!');
         }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "I agree to receive information from Discovery Communications in accordance with the following ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "rela-inline"
+      }, "I agree to receive information from Discovery Communications in accordance with the following ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "google.com"
-      }, "Privacy Policy"))), this.renderButton()), this.state.isEmailValid && this.state.isNameValid && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Look out for the latest news on your favorite shows."));
+      }, "Privacy Policy")))), this.state.isEmailValid && this.state.isNameValid && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "rela-inline"
+      }, "Look out for the latest news on your favorite shows.")));
     }
   }]);
 
@@ -400,7 +423,7 @@ function (_React$Component) {
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, ".layout {\n  min-height: 100vh;\n  transition: 0s; }\n\n.btn-submit {\n  background: #ed1f34;\n  border-radius: 5px;\n  cursor: pointer; }\n  .btn-submit:hover {\n    background: yellow; }\n", ""]);
+exports.push([module.i, "@media only screen and (min-width: 320px) and (max-device-width: 480px) {\n  .layout {\n    min-height: 100vh;\n    transition: 0s; }\n  .form-container {\n    text-align: center; }\n  .gutter-container {\n    width: 100%;\n    padding: 0 30px;\n    margin: 0 auto; }\n  form {\n    margin: 0 auto; }\n  .form-header {\n    max-width: 30%;\n    margin: 0 auto;\n    padding: 70px 30px 0 30px; }\n    .form-header .first-header {\n      max-width: 15%;\n      top: 11%;\n      color: #b6fdbf;\n      font-size: 36px;\n      line-height: 59px;\n      text-align: left; }\n    .form-header .second-header {\n      padding: 0 7px;\n      color: #94aebf;\n      font-weight: bold;\n      line-height: 20px;\n      margin-bottom: 12px; }\n  .signup-form input[type=\"text\"] {\n    width: 100%;\n    background: #fff;\n    mix-blend-mode: normal;\n    background-color: rgba(255, 255, 255, 0.1);\n    border: 1px solid rgba(255, 255, 255, 0.01);\n    border-radius: 5px;\n    line-height: 32px;\n    font-size: 14px;\n    font-weight: 300;\n    padding: 6px 12px;\n    outline: none; }\n    .signup-form input[type=\"text\"]:hover {\n      outline: none;\n      color: rgba(255, 255, 255, 0.8); }\n    .signup-form input[type=\"text\"]::placeholder {\n      color: #94aebf;\n      opacity: 0.4; }\n  .errors-container {\n    margin: 5px 0;\n    font-size: 12px;\n    color: red; }\n  .checkbox-container {\n    display: flex; }\n    .checkbox-container p {\n      font-weight: 300;\n      padding-left: 5px;\n      line-height: 14px;\n      color: #888888;\n      text-align: left; }\n  .btn-submit {\n    width: 100%;\n    color: #fff;\n    background: #ed1f34;\n    border: none;\n    border-radius: 5px;\n    cursor: pointer;\n    line-height: 32px; }\n    .btn-submit:hover {\n      opacity: 0.5; } }\n\n@media only screen and (min-width: 768px) and (max-device-width: 1024px) {\n  .layout {\n    min-height: 100vh;\n    transition: 0s; }\n  .form-container {\n    text-align: center; }\n  .gutter-container {\n    width: 100%;\n    padding: 0 30px;\n    margin: 0 auto; }\n  form {\n    margin: 0 auto; }\n  .form-header {\n    max-width: 30%;\n    margin: 0 auto;\n    padding: 70px 30px 0 30px; }\n    .form-header .first-header {\n      max-width: 15%;\n      top: 11%;\n      color: #b6fdbf;\n      font-size: 36px;\n      line-height: 59px;\n      text-align: left; }\n    .form-header .second-header {\n      padding: 0 7px;\n      color: #94aebf;\n      font-weight: bold;\n      line-height: 20px;\n      margin-bottom: 12px; }\n  .signup-form input[type=\"text\"] {\n    width: 100%;\n    background: #fff;\n    mix-blend-mode: normal;\n    background-color: rgba(255, 255, 255, 0.1);\n    border: 1px solid rgba(255, 255, 255, 0.01);\n    border-radius: 5px;\n    line-height: 32px;\n    font-size: 14px;\n    font-weight: 300;\n    padding: 6px 12px;\n    outline: none; }\n    .signup-form input[type=\"text\"]:hover {\n      outline: none;\n      color: rgba(255, 255, 255, 0.8); }\n    .signup-form input[type=\"text\"]::placeholder {\n      color: #94aebf;\n      opacity: 0.4; }\n  .errors-container {\n    margin: 5px 0;\n    font-size: 12px;\n    color: red; }\n  .checkbox-container {\n    display: flex; }\n    .checkbox-container p {\n      font-weight: 300;\n      padding-left: 5px;\n      line-height: 14px;\n      color: #888888;\n      text-align: left; }\n  .btn-submit {\n    width: 100%;\n    color: #fff;\n    background: #ed1f34;\n    border: none;\n    border-radius: 5px;\n    cursor: pointer;\n    line-height: 32px; }\n    .btn-submit:hover {\n      opacity: 0.5; } }\n", ""]);
 
 
 
