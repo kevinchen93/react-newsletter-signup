@@ -322,27 +322,27 @@ function (_React$Component) {
       // depending on state, renders either email input or first/last name inputs
       var inputElements = !this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.email,
         onChange: this.update('email'),
         className: "",
         placeholder: "enter email address"
-      }))) : this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })) : this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.firstName,
         onChange: this.update('firstName'),
         className: "",
         placeholder: "First Name"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.lastName,
         onChange: this.update('lastName'),
         className: "",
         placeholder: "Last Name"
-      }))) : null;
+      })) : null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, inputElements, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "errors-container"
       }, this.renderErrors()));
@@ -352,12 +352,12 @@ function (_React$Component) {
     value: function renderButton() {
       return !this.state.isEmailValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
-        value: "Next",
+        value: "NEXT",
         onClick: this.validateEmail,
         className: "btn-submit"
       }) : this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
-        value: "Sign Up",
+        value: "SIGN UP",
         onClick: this.validateName,
         className: "btn-submit"
       }) : null;
@@ -423,7 +423,7 @@ function (_React$Component) {
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {\n  .layout {\n    min-height: 100vh;\n    transition: 0s; }\n  .form-container {\n    text-align: center; }\n  .gutter-container {\n    width: 100%;\n    padding: 0 30px;\n    margin: 0 auto; }\n  form {\n    margin: 0 auto; }\n  .form-header {\n    max-width: 30%;\n    margin: 0 auto;\n    padding: 70px 30px 0 30px; }\n    .form-header .first-header {\n      max-width: 15%;\n      top: 11%;\n      color: #b6fdbf;\n      font-size: 36px;\n      line-height: 59px;\n      text-align: left; }\n    .form-header .second-header {\n      padding: 0 7px;\n      color: #94aebf;\n      font-weight: bold;\n      line-height: 20px;\n      margin-bottom: 12px; }\n  .signup-form input[type=\"text\"] {\n    display: block;\n    width: 100%;\n    padding: 6px 12px;\n    margin: 0;\n    color: rgba(148, 174, 191, 0.8);\n    border: 1px solid rgba(255, 255, 255, 0.01);\n    background-color: rgba(255, 255, 255, 0.1);\n    text-align: left;\n    font-weight: 300;\n    font-size: 1.8rem;\n    font-family: Azo Sans,sans-serif;\n    border-radius: 4px;\n    outline: none;\n    transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out; }\n    .signup-form input[type=\"text\"]:hover {\n      outline: none;\n      color: rgba(255, 255, 255, 0.8); }\n    .signup-form input[type=\"text\"]::placeholder {\n      color: #94aebf;\n      opacity: 0.4; }\n  .errors-container {\n    margin: 5px 0;\n    font-size: 12px;\n    color: red; }\n  .checkbox-container {\n    display: flex; }\n    .checkbox-container p {\n      font-weight: 300;\n      padding-left: 5px;\n      line-height: 14px;\n      color: #888888;\n      text-align: left; }\n  .btn-submit {\n    width: 100%;\n    color: #fff;\n    background: #ed1f34;\n    border: none;\n    border-radius: 5px;\n    cursor: pointer;\n    line-height: 32px;\n    margin-bottom: 15px; }\n    .btn-submit:hover {\n      opacity: 0.5; } }\n", ""]);
+exports.push([module.i, "@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {\n  .layout {\n    min-height: 100vh;\n    transition: 0s; }\n  .form-container {\n    text-align: center; }\n  .gutter-container {\n    width: 100%;\n    padding: 0 30px;\n    margin: 0 auto; }\n  form {\n    margin: 0 auto; }\n  .form-header {\n    margin: 0 auto;\n    padding: 70px 30px 0 30px; }\n    .form-header .first-header {\n      max-width: 45%;\n      top: 22%;\n      color: #b6fdbf;\n      font-size: 36px;\n      line-height: 59px;\n      text-align: left; }\n    .form-header .second-header {\n      padding: 0 7px;\n      color: #94aebf;\n      font-weight: bold;\n      line-height: 20px;\n      margin-bottom: 12px; }\n  .signup-form input[type=\"text\"] {\n    display: block;\n    width: 100%;\n    padding: 6px 12px;\n    margin: 0;\n    margin-bottom: 13px;\n    color: rgba(148, 174, 191, 0.8);\n    border: 1px solid rgba(255, 255, 255, 0.01);\n    background-color: rgba(255, 255, 255, 0.1);\n    text-align: left;\n    font-weight: normal;\n    font-size: 14px;\n    line-height: 32px;\n    border-radius: 4px;\n    outline: none;\n    transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out; }\n    .signup-form input[type=\"text\"]:hover {\n      outline: none;\n      color: rgba(255, 255, 255, 0.8); }\n    .signup-form input[type=\"text\"]::placeholder {\n      font-family: 'Open Sans', sans-serif;\n      color: #94aebf;\n      opacity: 0.4; }\n  .errors-container {\n    margin: 5px 0;\n    font-size: 12px;\n    color: red; }\n  .checkbox-container {\n    display: flex; }\n    .checkbox-container p {\n      font-weight: 300;\n      padding-left: 5px;\n      font-size: 12px;\n      line-height: 14px;\n      color: #888888;\n      text-align: left; }\n  .btn-submit {\n    width: 100%;\n    background: #ed1f34;\n    cursor: pointer;\n    display: block;\n    border: 1px solid #ed1f34;\n    box-shadow: 0 0 0 transparent;\n    border-radius: 4px;\n    padding: 8px 14px;\n    color: #fff;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 20px;\n    margin: 0;\n    margin-bottom: 15px;\n    transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out,opacity .25s ease-in-out,border-color .25s ease-in-out,color .25s ease-in-out;\n    margin-bottom: 20px;\n    width: 100%; }\n    .btn-submit:hover {\n      opacity: 0.5; } }\n", ""]);
 
 
 

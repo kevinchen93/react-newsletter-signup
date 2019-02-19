@@ -99,20 +99,17 @@ class SignupForm extends React.Component {
     const inputElements = (!this.state.isEmailValid && !this.state.isNameValid) ?
       (
         <div className="input-container">
-          <label>
-            <input
-              type="text"
-              value={this.state.email}
-              onChange={this.update('email')}
-              className=""
-              placeholder="enter email address"
-              />
-          </label>
+          <input
+            type="text"
+            value={this.state.email}
+            onChange={this.update('email')}
+            className=""
+            placeholder="enter email address"
+            />
         </div>
       ) : (this.state.isEmailValid && !this.state.isNameValid) ?
       (
         <div className="input-container">
-          <label>
             <input
               type="text"
               value={this.state.firstName}
@@ -120,9 +117,7 @@ class SignupForm extends React.Component {
               className=""
               placeholder="First Name"
               />
-          </label>
           <br />
-          <label>
             <input
               type="text"
               value={this.state.lastName}
@@ -130,7 +125,6 @@ class SignupForm extends React.Component {
               className=""
               placeholder="Last Name"
               />
-          </label>
         </div>
       ) : null;
 
@@ -149,7 +143,7 @@ class SignupForm extends React.Component {
       (
         <input
           type="submit"
-          value="Next"
+          value="NEXT"
           onClick={ this.validateEmail }
           className="btn-submit"
         />
@@ -157,7 +151,7 @@ class SignupForm extends React.Component {
       (
         <input
           type="submit"
-          value="Sign Up"
+          value="SIGN UP"
           onClick={ this.validateName }
           className="btn-submit"
         />
