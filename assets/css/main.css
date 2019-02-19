@@ -35,9 +35,6 @@ input {
   background: #fff;
   color: #94aebf;
   mix-blend-mode: normal;
-  margin-bottom: 10px;
-  -webkit-appearance: none;
-  box-shadow: none;
 }
 input:focus {
   outline: none;
