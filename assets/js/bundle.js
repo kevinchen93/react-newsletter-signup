@@ -303,23 +303,24 @@ function (_React$Component) {
       // depending on state, renders header text
       var headerMessages = {
         'invalidEmail': "".concat('Sign up for the TLC Newsletter.'.toUpperCase()),
-        'invalidName': "".concat('Almost done! Please enter your first and last name.'.toUpperCase()),
-        'successfulSignUp': 'Thank You For Signing Up!'
+        'invalidName': "".concat('Almost done! Please enter your first and last name.'.toUpperCase())
       };
-      var firstHeader = this.state.isEmailValid && this.state.isNameValid ? 'congratulations' : 'Join the list';
-      var secondHeader = !this.state.isEmailValid && !this.state.isNameValid ? headerMessages['invalidEmail'] : this.state.isEmailValid && !this.state.isNameValid ? headerMessages['invalidName'] : headerMessages['successfulSignUp'];
+      var firstHeader = (!this.state.isEmailValid || !this.state.isNameValid) && 'Join the list' || 'congratulations';
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-header"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        className: "first-header abs-center"
-      }, firstHeader), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        className: "second-header"
-      }, secondHeader));
+        className: "newsletter-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "newsletter-title"
+      }, firstHeader));
     }
   }, {
     key: "renderInputs",
     value: function renderInputs() {
       // depending on state, renders either email input or first/last name inputs
+      var headerMessages = {
+        'invalidEmail': "".concat('Sign up for the TLC Newsletter'.toUpperCase()),
+        'invalidName': "".concat('Almost done! Please enter your first and last name.'.toUpperCase())
+      };
+      var subtitle = !this.state.isEmailValid && !this.state.isNameValid ? headerMessages['invalidEmail'] : this.state.isEmailValid && !this.state.isNameValid ? headerMessages['invalidName'] : '';
       var inputElements = !this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -334,16 +335,18 @@ function (_React$Component) {
         type: "text",
         value: this.state.firstName,
         onChange: this.update('firstName'),
-        className: "",
+        className: "first-name",
         placeholder: "First Name"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.lastName,
         onChange: this.update('lastName'),
-        className: "",
+        className: "last-name",
         placeholder: "Last Name"
       })) : null;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, inputElements, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "newsletter-subtitle"
+      }, subtitle), inputElements, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "errors-container"
       }, this.renderErrors()));
     }
@@ -379,31 +382,42 @@ function (_React$Component) {
       console.log('THIS.STATE (submitted): ', this.state);
     }
   }, {
+    key: "renderPostSubmitMessage",
+    value: function renderPostSubmitMessage() {
+      return this.state.isEmailValid && this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "postSubmitMessage-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "success-message"
+      }, "Thank You For Signing Up!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "rela-inline newsletter-subtext"
+      }, "Look out for the latest news on your favorite shows.")) : null;
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "gutter-container"
+        className: "newsletter-container"
+      }, this.renderHeader(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "newsletter-content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "signup-form",
+        className: "newsletter-form",
         onSubmit: this.handleSubmit
-      }, this.renderHeader(), this.renderInputs(), this.renderButton(), !this.state.isEmailValid && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("fieldset", {
+        className: "newsletter-fieldset"
+      }, this.renderInputs(), this.renderButton(), this.renderPostSubmitMessage()), !this.state.isEmailValid && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "rela-inline checkbox-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "checkbox",
         value: "policy",
         className: "",
         onChange: function onChange() {
-          return console.log('Checked!');
+          return console.log('Checkbox checked!');
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "rela-inline"
       }, "I agree to receive information from Discovery Communications in accordance with the following ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "google.com"
-      }, "Privacy Policy")))), this.state.isEmailValid && this.state.isNameValid && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "rela-inline"
-      }, "Look out for the latest news on your favorite shows.")));
+        href: "https://corporate.discovery.com/privacy-policy/"
+      }, "Privacy Policy"))))));
     }
   }]);
 
@@ -423,7 +437,7 @@ function (_React$Component) {
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {\n  .layout {\n    min-height: 100vh;\n    transition: 0s; }\n  .form-container {\n    text-align: center; }\n  .gutter-container {\n    width: 100%;\n    padding: 0 30px;\n    margin: 0 auto; }\n  form {\n    margin: 0 auto; }\n  .form-header {\n    margin: 0 auto;\n    padding: 70px 30px 0 30px; }\n    .form-header .first-header {\n      max-width: 45%;\n      top: 22%;\n      color: #b6fdbf;\n      font-size: 36px;\n      line-height: 59px;\n      text-align: left; }\n    .form-header .second-header {\n      padding: 0 7px;\n      color: #94aebf;\n      font-weight: bold;\n      line-height: 20px;\n      margin-bottom: 12px; }\n  .signup-form input[type=\"text\"] {\n    display: block;\n    width: 100%;\n    padding: 6px 12px;\n    margin: 0;\n    margin-bottom: 13px;\n    color: rgba(148, 174, 191, 0.8);\n    border: 1px solid rgba(255, 255, 255, 0.01);\n    background-color: rgba(255, 255, 255, 0.1);\n    text-align: left;\n    font-weight: normal;\n    font-size: 14px;\n    line-height: 32px;\n    border-radius: 4px;\n    outline: none;\n    transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out; }\n    .signup-form input[type=\"text\"]:hover {\n      outline: none;\n      color: rgba(255, 255, 255, 0.8); }\n    .signup-form input[type=\"text\"]::placeholder {\n      font-family: 'Open Sans', sans-serif;\n      color: #94aebf;\n      opacity: 0.4; }\n  .errors-container {\n    margin: 5px 0;\n    font-size: 12px;\n    color: red; }\n  .checkbox-container {\n    display: flex; }\n    .checkbox-container p {\n      font-weight: 300;\n      padding-left: 5px;\n      font-size: 12px;\n      line-height: 14px;\n      color: #888888;\n      text-align: left; }\n  .btn-submit {\n    width: 100%;\n    background: #ed1f34;\n    cursor: pointer;\n    display: block;\n    border: 1px solid #ed1f34;\n    box-shadow: 0 0 0 transparent;\n    border-radius: 4px;\n    padding: 8px 14px;\n    color: #fff;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 20px;\n    margin: 0;\n    margin-bottom: 15px;\n    transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out,opacity .25s ease-in-out,border-color .25s ease-in-out,color .25s ease-in-out;\n    margin-bottom: 20px;\n    width: 100%; }\n    .btn-submit:hover {\n      opacity: 0.5; } }\n", ""]);
+exports.push([module.i, "@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {\n  .layout {\n    min-height: 100vh;\n    transition: 0s; }\n  .newsletter-container {\n    width: 100%;\n    max-width: 520px;\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    box-sizing: border-box;\n    margin-left: auto;\n    margin-right: auto;\n    padding: 40px;\n    z-index: 1; }\n  .newsletter-header {\n    position: relative;\n    flex-basis: auto; }\n    .newsletter-header .newsletter-title {\n      color: #b6fdbf;\n      font-size: 36px;\n      line-height: 59px;\n      position: relative;\n      margin: 10px 0;\n      text-align: center; }\n  .newsletter-subtitle {\n    padding: 0 7px;\n    color: #94aebf;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 20px;\n    text-align: center;\n    margin-bottom: 12px; }\n  .newsletter-subtext {\n    color: #94aebf;\n    font-size: 18px;\n    font-weight: 300;\n    line-height: normal;\n    margin-bottom: 10px;\n    text-align: center; }\n  .newsletter-form {\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    margin: 0;\n    padding: 0; }\n    .newsletter-form .newsletter-fieldset {\n      position: relative;\n      flex: 1 1 auto;\n      padding: 0; }\n    .newsletter-form .input-container {\n      display: flex;\n      margin-bottom: 13px; }\n    .newsletter-form input[type=\"text\"] {\n      display: block;\n      width: 100%;\n      padding: 6px 12px;\n      color: rgba(148, 174, 191, 0.8);\n      border: 1px solid rgba(255, 255, 255, 0.01);\n      background-color: rgba(255, 255, 255, 0.1);\n      text-align: left;\n      font-weight: normal;\n      font-size: 14px;\n      line-height: 32px;\n      border-radius: 4px;\n      outline: none;\n      transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out; }\n      .newsletter-form input[type=\"text\"]:hover {\n        outline: none;\n        color: rgba(255, 255, 255, 0.8); }\n      .newsletter-form input[type=\"text\"]::placeholder {\n        font-family: 'Open Sans', sans-serif;\n        color: #94aebf;\n        opacity: 0.4; }\n    .newsletter-form .success-message {\n      margin-bottom: 20px;\n      color: #94aebf;\n      font-size: 24px;\n      line-height: 30px;\n      font-weight: bold;\n      text-align: center; }\n    .newsletter-form .first-name {\n      margin-right: 10px; }\n  .errors-container {\n    margin: 5px 0;\n    font-size: 12px;\n    color: red; }\n  .checkbox-container {\n    display: flex; }\n    .checkbox-container p {\n      font-weight: 300;\n      padding-left: 5px;\n      font-size: 12px;\n      line-height: 14px;\n      color: #888888;\n      text-align: left; }\n  .btn-submit {\n    width: 100%;\n    display: block;\n    background: #ed1f34;\n    cursor: pointer;\n    border: 1px solid #ed1f34;\n    box-shadow: 0 0 0 transparent;\n    border-radius: 4px;\n    padding: 8px 14px;\n    color: #fff;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 20px;\n    margin: 0;\n    margin-bottom: 15px;\n    transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out,opacity .25s ease-in-out,border-color .25s ease-in-out,color .25s ease-in-out;\n    margin-bottom: 20px; }\n    .btn-submit:hover {\n      opacity: 0.5; } }\n\n@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {\n  .layout {\n    min-height: 100vh;\n    transition: 0s; }\n  .form-container {\n    text-align: center; }\n  .gutter-container {\n    width: 100%;\n    padding: 0 30px;\n    margin: 0 auto; }\n  form {\n    margin: 0 auto; }\n  .form-header {\n    margin: 0 auto;\n    padding: 70px 30px 0 30px; }\n    .form-header .first-header {\n      max-width: 45%;\n      top: 10%;\n      color: #b6fdbf;\n      font-size: 50px;\n      line-height: 60px;\n      text-align: left; }\n    .form-header .second-header {\n      padding: 0 7px;\n      color: #94aebf;\n      font-weight: bold;\n      line-height: 20px;\n      margin-bottom: 12px; }\n  .signup-form input[type=\"text\"] {\n    display: inline-block;\n    width: 100%;\n    padding: 6px 12px;\n    margin-right: 10px;\n    margin-bottom: 13px;\n    color: rgba(148, 174, 191, 0.8);\n    border: 1px solid rgba(255, 255, 255, 0.01);\n    background-color: rgba(255, 255, 255, 0.1);\n    text-align: left;\n    font-weight: normal;\n    font-size: 24px;\n    line-height: 32px;\n    border-radius: 4px;\n    outline: none;\n    transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out; }\n    .signup-form input[type=\"text\"]:hover {\n      outline: none;\n      color: rgba(255, 255, 255, 0.8); }\n    .signup-form input[type=\"text\"]::placeholder {\n      font-family: 'Open Sans', sans-serif;\n      color: #94aebf;\n      opacity: 0.4; }\n  .errors-container {\n    margin: 5px 0;\n    font-size: 12px;\n    color: red; }\n  .checkbox-container {\n    display: flex;\n    align-items: center; }\n    .checkbox-container p {\n      font-weight: 300;\n      padding-left: 5px;\n      font-size: 12px;\n      line-height: 14px;\n      color: #888888;\n      text-align: left; }\n  .btn-submit {\n    width: 100%;\n    display: inline-block;\n    background: #ed1f34;\n    cursor: pointer;\n    border: 1px solid #ed1f34;\n    box-shadow: 0 0 0 transparent;\n    border-radius: 4px;\n    padding: 8px 14px;\n    color: #fff;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 20px;\n    margin: 0;\n    margin-bottom: 15px;\n    transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out,opacity .25s ease-in-out,border-color .25s ease-in-out,color .25s ease-in-out;\n    margin-bottom: 20px; }\n    .btn-submit:hover {\n      opacity: 0.5; } }\n", ""]);
 
 
 
