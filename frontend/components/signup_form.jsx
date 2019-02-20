@@ -30,20 +30,23 @@ class SignupForm extends React.Component {
     const isEmailValid = re.test(String(this.state.email));
     const errors = [];
     const errorMessages = {
-      'invalidEmail': 'Email cannot be blank.',
-      'validEmail': 'Please enter a valid email.'
+      'blankEmail': '*Email cannot be blank.',
+      'invalidEmail': '*Please enter a valid email.'
     }
     if (!isEmailValid) {
       if (this.state.email.length === 0) {
-        errors.push(`${errorMessages['invalidEmail']}`);
+        errors.push(`${errorMessages['blankEmail']}`);
       } else {
-        errors.push(`${errorMessages['validEmail']}`);
+        errors.push(`${errorMessages['invalidEmail']}`);
       }
     }
 
     this.setState(
       { isEmailValid: isEmailValid, errors: errors},
-      () => console.log('CURRENT STATE AFTER PRESSING NEXT: ', this.state)
+      () => {
+        console.log('CURRENT STATE AFTER PRESSING NEXT: ', this.state);
+        console.log('IS EMAIL VALID? ', isEmailValid);
+      }
     );
   }
 
@@ -53,13 +56,16 @@ class SignupForm extends React.Component {
     const isNameValid = re.test(String(this.state.firstName)) && re.test(String(this.state.lastName));
     const errors = [];
     const errorMessages = {
-      'firstName': 'First name cannot be blank.',
-      'lastName': 'Last name cannot be blank.',
-      'fullName': 'Please enter a valid first and last name.',
+      'firstName': '*First name cannot be blank.',
+      'lastName': '*Last name cannot be blank.',
+      'empty': '*Please enter a first and last name.',
+      'fullName': '*Please enter a valid first and last name.',
     };
 
     if (!isNameValid) {
-      if (this.state.firstName.length === 0) {
+      if (this.state.firstName.length === 0 && this.state.lastName.length === 0) {
+        errors.push(`${errorMessages['emptyName']}`);
+      } else if (this.state.firstName.length === 0) {
         errors.push(`${errorMessages['firstName']}`);
       } else if (this.state.lastName.length === 0){
         errors.push(`${errorMessages['lastName']}`);
@@ -69,19 +75,17 @@ class SignupForm extends React.Component {
     }
 
     this.setState(
-      { isNameValid: isNameValid, errors: errors},
-      () => console.log('CURRENT STATE AFTER PRESSING SIGN UP: ', this.state)
+      { isNameValid: isNameValid, errors: errors },
+      () => {
+        console.log('CURRENT STATE AFTER PRESSING SIGN UP: ', this.state);
+        console.log('IS NAME VALID? ', isNameValid);
+      }
     );
   }
 
   renderHeader() {
     // depending on state, renders header text
-    const titleMessages = {
-      'invalidEmail': `${'Sign up for the TLC Newsletter.'.toUpperCase()}`,
-      'invalidName': `${'Almost done! Please enter your first and last name.'.toUpperCase()}`,
-    };
-
-    const title = (!this.state.isEmailValid || !this.state.isNameValid) && 'Join the list' || 'congratulations';
+    const title = (!this.state.isEmailValid || !this.state.isNameValid) ? 'Join the list' : 'congratulations!';
 
     return (
       <div className="newsletter-header">
@@ -141,9 +145,6 @@ class SignupForm extends React.Component {
     return (
       <div className="input-wrapper">
         {inputElements}
-        <div className="errors-container">
-          {this.renderErrors()}
-        </div>
       </div>
     )
   }
@@ -211,15 +212,20 @@ class SignupForm extends React.Component {
                 {this.renderPostSubmitMessage()}
               </fieldset>
             </form>
+            <div className="errors-container">
+              {this.renderErrors()}
+            </div>
             {!this.state.isEmailValid &&
-              <div className="rela-inline checkbox-container">
-                <input
-                  type="checkbox"
-                  value="policy"
-                  className=""
-                  onChange={ () => console.log('Checkbox checked!') }
-                  />
-                <p className="rela-inline">I agree to receive information from Discovery Communications in accordance with the following <a href="https://corporate.discovery.com/privacy-policy/">Privacy Policy</a></p>
+              <div className="rela-inline form-notifications-container">
+                <div className="checkbox-wrapper">
+                  <input
+                    type="checkbox"
+                    value="policy"
+                    className=""
+                    onChange={ () => console.log('Checkbox checked!') }
+                    />
+                  <p className="rela-inline">I agree to receive information from Discovery Communications in accordance with the following <a href="https://corporate.discovery.com/privacy-policy/">Privacy Policy</a></p>
+                </div>
               </div>
             }
           </div>

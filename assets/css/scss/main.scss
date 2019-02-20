@@ -111,8 +111,12 @@
     margin: 5px 0;
     font-size: 12px;
     color: red;
+    transition: height .5s ease-in-out;
+    li {
+      text-align: left;
+    }
   }
-  .checkbox-container {
+  .form-notifications-container {
     display: flex;
     input[type="checkbox"] {
     }
@@ -222,7 +226,7 @@
       display: inline-block;
       width: 63%;
       flex: 1;
-      margin-right: 7px;
+      margin-right: 20px;
       .input-container {
         display: flex;
         flex: 1 1 auto;
@@ -274,9 +278,13 @@
     margin: 5px 0;
     font-size: 12px;
     color: red;
+    transition: height .5s ease-in-out;
+    li {
+      text-align: left;
+    }
   }
-  .checkbox-container {
-    width: 50%;
+  .form-notifications-container {
+    width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -320,4 +328,177 @@
 
 // Desktop
 @media only screen and (min-device-width : 1224px) {
+  .layout {
+    min-height: 100vh;
+    transition: 0s;
+  }
+  .newsletter-container {
+    width: auto;
+    max-width: 9999em;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px 80px;
+    z-index: 1;
+  }
+  .newsletter-header {
+    // margin: 0 auto;
+    // padding: 70px 30px 0 30px;
+    position: relative;
+    flex: 2 1 35%;
+    .newsletter-title {
+      // max-width: 45%;
+      // top: 22%;
+      color: #b6fdbf;
+      font-size: 50px;
+      line-height: 60px;
+      // text-align: left;
+      position: relative;
+      margin: 40px 20px 40px 0;
+      text-align: right;
+    }
+  }
+  .newsletter-content {
+    position: relative;
+    color: #94aebf;
+    flex: 1 1 65%;
+  }
+  .newsletter-subtitle {
+    padding: 0 7px;
+    color: #94aebf;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 30px;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  .newsletter-subtext {
+    color: #94aebf;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: normal;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .newsletter-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    .newsletter-fieldset {
+      position: relative;
+      // display: flex;
+      flex-direction: row;
+      flex: 1 1 60%;
+      padding: 0;
+      // text-align: center;
+    }
+    .input-wrapper {
+      display: inline-block;
+      width: 63%;
+      flex: 1;
+      margin-right: 20px;
+      .input-container {
+        display: flex;
+        flex: 1 1 auto;
+      }
+    }
+    .form-action-wrapper {
+      display: inline-block;
+      width: 25%;
+      flex: 1;
+    }
+    input[type="text"] {
+      display: block;
+      width: 100%;
+      padding: 6px 12px;
+      color: rgba(148,174,191,.8);
+      border: 1px solid hsla(0,0%,100%,.01);
+      background-color: hsla(0,0%,100%,.1);
+      text-align: left;
+      font-weight: normal;
+      font-size: 24px;
+      line-height: 32px;
+      // font-family: Azo Sans,sans-serif;
+      border-radius: 4px;
+      outline: none;
+      transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out;
+      &:hover {
+        outline: none;
+        color: hsla(0,0%,100%,.8);
+      }
+      &::placeholder {
+        font-family: 'Open Sans', sans-serif;
+        color: #94aebf;
+        opacity: 0.4;
+      }
+    }
+    .success-message {
+      margin-bottom: 20px;
+      color: #94aebf;
+      font-size: 24px;
+      line-height: 30px;
+      font-weight: bold;
+    }
+    .first-name {
+      margin-right: 10px;
+    }
+  }
+  .errors-container {
+    margin: 5px 0;
+    font-size: 12px;
+    color: red;
+    li {
+      text-align: left;
+    }
+  }
+  .form-notifications-container {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    // align-items: center;
+
+    // margin-left: 35px;
+    input[type="checkbox"] {
+    }
+    p {
+      font-weight: 300;
+      padding-left: 5px;
+      font-size: 12px;
+      line-height: 14px;
+      color: #888888;
+      text-align: left;
+    }
+    .checkbox-wrapper {
+      display: flex;
+    }
+  }
+  .btn-submit {
+    width: auto;
+    min-width: 180px;
+    max-width: 100%;
+    display: block;
+    background: #ed1f34;
+    cursor: pointer;
+    border: 1px solid #ed1f34;
+    box-shadow: 0 0 0 transparent;
+    border-radius: 4px;
+    padding: 13px 14px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 32px;
+    margin: 0;
+    transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out,opacity .25s ease-in-out,border-color .25s ease-in-out,color .25s ease-in-out;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    // &:hover {
+    //   opacity: 0.5;
+    // }
+  }
 }
