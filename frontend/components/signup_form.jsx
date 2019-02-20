@@ -196,9 +196,6 @@ class SignupForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log('SUBMIT CLICKED');
-    console.log('IS EMAIL VALID? ', this.state);
-    console.log('IS NAME VALID? ', this.state);
-    console.log('THIS.STATE (submitted): ', this.state);
   }
 
   renderPostSubmitMessage() {
