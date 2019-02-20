@@ -1,6 +1,6 @@
 # allergan-take-home
-A coding exercise with the goal of creating a basic UI component using React to simulate a Newsletter Sign Up with multiple states.
-
+A coding exercise with the goal of creating a basic UI component using React to simulate a Newsletter Sign Up with multiple states.  
+[Live!](https://kevinnn.co/allergan-take-home)
 ## Requirements
 1. Must use React JS to complete the project.
 2. Must build and run in a web browser.
