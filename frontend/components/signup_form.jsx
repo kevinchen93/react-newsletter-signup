@@ -9,7 +9,8 @@ class SignupForm extends React.Component {
       email: '',
       errors: [],
       isEmailValid: false,
-      isNameValid: false
+      isNameValid: false,
+      isLoading: false
     };
 
     this.update = this.update.bind(this);
@@ -150,6 +151,17 @@ class SignupForm extends React.Component {
   }
 
   renderButton() {
+    if (this.state.loading) {
+      return (
+          <PulseLoader
+        className="loading-dots"
+        sizeUnit={"px"}
+        size={12}
+        color={'#008489'}
+      />
+
+      )
+    }
     return (!this.state.isEmailValid) ?
       (
         <input
@@ -184,17 +196,26 @@ class SignupForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log('SUBMIT CLICKED');
+    console.log('IS EMAIL VALID? ', this.state);
+    console.log('IS NAME VALID? ', this.state);
     console.log('THIS.STATE (submitted): ', this.state);
   }
 
   renderPostSubmitMessage() {
-    return (this.state.isEmailValid && this.state.isNameValid) ?
-      (
+    if (this.state.isEmailValid && this.state.isNameValid) {
+      console.log('SUBMIT CLICKED');
+      console.log('CONGRATULATIONS');
+      console.log('THIS.STATE (submitted): ', this.state);
+
+      return (
         <div className="postSubmitMessage-container">
           <p className="success-message">Thank You For Signing Up!</p>
           <p className="rela-inline newsletter-subtext">Look out for the latest news on your favorite shows.</p>
         </div>
-      ) : null
+      )
+    } else {
+        return null;
+    }
   }
 
   render() {

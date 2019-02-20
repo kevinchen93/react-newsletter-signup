@@ -218,7 +218,8 @@ function (_React$Component) {
       email: '',
       errors: [],
       isEmailValid: false,
-      isNameValid: false
+      isNameValid: false,
+      isLoading: false
     };
     _this.update = _this.update.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.validateEmail = _this.validateEmail.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -359,6 +360,15 @@ function (_React$Component) {
   }, {
     key: "renderButton",
     value: function renderButton() {
+      if (this.state.loading) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PulseLoader, {
+          className: "loading-dots",
+          sizeUnit: "px",
+          size: 12,
+          color: '#008489'
+        });
+      }
+
       return !this.state.isEmailValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         value: "NEXT",
@@ -385,18 +395,27 @@ function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       console.log('SUBMIT CLICKED');
+      console.log('IS EMAIL VALID? ', this.state);
+      console.log('IS NAME VALID? ', this.state);
       console.log('THIS.STATE (submitted): ', this.state);
     }
   }, {
     key: "renderPostSubmitMessage",
     value: function renderPostSubmitMessage() {
-      return this.state.isEmailValid && this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "postSubmitMessage-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "success-message"
-      }, "Thank You For Signing Up!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "rela-inline newsletter-subtext"
-      }, "Look out for the latest news on your favorite shows.")) : null;
+      if (this.state.isEmailValid && this.state.isNameValid) {
+        console.log('SUBMIT CLICKED');
+        console.log('CONGRATULATIONS');
+        console.log('THIS.STATE (submitted): ', this.state);
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "postSubmitMessage-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "success-message"
+        }, "Thank You For Signing Up!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "rela-inline newsletter-subtext"
+        }, "Look out for the latest news on your favorite shows."));
+      } else {
+        return null;
+      }
     }
   }, {
     key: "render",
