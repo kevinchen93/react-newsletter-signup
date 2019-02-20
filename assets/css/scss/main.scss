@@ -85,12 +85,6 @@
       border-radius: 4px;
       outline: none;
       transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out;
-      &:hover,
-      &:focus {
-        outline: none;
-        color: hsla(0,0%,100%,.8);
-        background-color: hsla(0,0%,100%,.3);
-      }
       &::placeholder {
         font-family: 'Open Sans', sans-serif;
         color: #94aebf;
@@ -254,12 +248,6 @@
       border-radius: 4px;
       outline: none;
       transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out;
-      &:hover,
-      &:focus {
-        outline: none;
-        color: hsla(0,0%,100%,.8);
-        background-color: hsla(0,0%,100%,.3);
-      }
       &::placeholder {
         font-family: 'Open Sans', sans-serif;
         color: #94aebf;
@@ -431,12 +419,6 @@
       border-radius: 4px;
       outline: none;
       transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out;
-      &:hover,
-      &:focus {
-        outline: none;
-        color: hsla(0,0%,100%,.8);
-        background-color: hsla(0,0%,100%,.3);
-      }
       &::placeholder {
         font-family: 'Open Sans', sans-serif;
         color: #94aebf;
