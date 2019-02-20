@@ -65,7 +65,7 @@ class SignupForm extends React.Component {
 
     if (!isNameValid) {
       if (this.state.firstName.length === 0 && this.state.lastName.length === 0) {
-        errors.push(`${errorMessages['emptyName']}`);
+        errors.push(`${errorMessages['empty']}`);
       } else if (this.state.firstName.length === 0) {
         errors.push(`${errorMessages['firstName']}`);
       } else if (this.state.lastName.length === 0){

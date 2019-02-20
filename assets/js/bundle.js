@@ -285,7 +285,7 @@ function (_React$Component) {
 
       if (!isNameValid) {
         if (this.state.firstName.length === 0 && this.state.lastName.length === 0) {
-          errors.push("".concat(errorMessages['emptyName']));
+          errors.push("".concat(errorMessages['empty']));
         } else if (this.state.firstName.length === 0) {
           errors.push("".concat(errorMessages['firstName']));
         } else if (this.state.lastName.length === 0) {
