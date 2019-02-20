@@ -76,31 +76,37 @@ class SignupForm extends React.Component {
 
   renderHeader() {
     // depending on state, renders header text
-    const headerMessages = {
+    const titleMessages = {
       'invalidEmail': `${'Sign up for the TLC Newsletter.'.toUpperCase()}`,
       'invalidName': `${'Almost done! Please enter your first and last name.'.toUpperCase()}`,
     };
 
-    const firstHeader = (!this.state.isEmailValid || !this.state.isNameValid) && 'Join the list' || 'congratulations';
+    const title = (!this.state.isEmailValid || !this.state.isNameValid) && 'Join the list' || 'congratulations';
 
     return (
       <div className="newsletter-header">
-        <h3 className="newsletter-title">{ firstHeader }</h3>
+        <h3 className="newsletter-title">{ title }</h3>
       </div>
+    )
+  }
+
+  renderSubtitle() {
+    const subtitleMessages = {
+      'invalidEmail': `${'Sign up for the TLC Newsletter'.toUpperCase()}`,
+      'invalidName': `${'Almost done! Please enter your first and last name.'.toUpperCase()}`
+    };
+
+    const subtitle = (!this.state.isEmailValid && !this.state.isNameValid) ? subtitleMessages['invalidEmail']
+    : (this.state.isEmailValid && !this.state.isNameValid) ? subtitleMessages['invalidName']
+    : '';
+
+    return (
+      <p className="newsletter-subtitle">{ subtitle }</p>
     )
   }
 
   renderInputs() {
     // depending on state, renders either email input or first/last name inputs
-    const headerMessages = {
-      'invalidEmail': `${'Sign up for the TLC Newsletter'.toUpperCase()}`,
-      'invalidName': `${'Almost done! Please enter your first and last name.'.toUpperCase()}`
-    };
-
-    const subtitle = (!this.state.isEmailValid && !this.state.isNameValid) ? headerMessages['invalidEmail']
-                    : (this.state.isEmailValid && !this.state.isNameValid) ? headerMessages['invalidName']
-                    : '';
-
     const inputElements = (!this.state.isEmailValid && !this.state.isNameValid) ?
       (
         <div className="input-container">
@@ -133,8 +139,7 @@ class SignupForm extends React.Component {
       ) : null;
 
     return (
-      <div>
-        <p className="newsletter-subtitle">{ subtitle }</p>
+      <div className="input-wrapper">
         {inputElements}
         <div className="errors-container">
           {this.renderErrors()}
@@ -196,24 +201,27 @@ class SignupForm extends React.Component {
       <div className="newsletter-container">
           {this.renderHeader()}
           <div className="newsletter-content">
+            {this.renderSubtitle()}
             <form className="newsletter-form" onSubmit={ this.handleSubmit }>
               <fieldset className="newsletter-fieldset">
                 {this.renderInputs()}
-                {this.renderButton()}
+                <div className="form-action-wrapper">
+                  {this.renderButton()}
+                </div>
                 {this.renderPostSubmitMessage()}
               </fieldset>
-              {!this.state.isEmailValid &&
-                <div className="rela-inline checkbox-container">
-                  <input
-                    type="checkbox"
-                    value="policy"
-                    className=""
-                    onChange={ () => console.log('Checkbox checked!') }
-                    />
-                  <p className="rela-inline">I agree to receive information from Discovery Communications in accordance with the following <a href="https://corporate.discovery.com/privacy-policy/">Privacy Policy</a></p>
-                </div>
-              }
             </form>
+            {!this.state.isEmailValid &&
+              <div className="rela-inline checkbox-container">
+                <input
+                  type="checkbox"
+                  value="policy"
+                  className=""
+                  onChange={ () => console.log('Checkbox checked!') }
+                  />
+                <p className="rela-inline">I agree to receive information from Discovery Communications in accordance with the following <a href="https://corporate.discovery.com/privacy-policy/">Privacy Policy</a></p>
+              </div>
+            }
           </div>
       </div>
     )
