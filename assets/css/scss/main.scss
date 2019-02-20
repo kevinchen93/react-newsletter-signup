@@ -1,5 +1,5 @@
 // Mobile
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+@media only screen and (min-device-width : 320px) {
   .layout {
     min-height: 100vh;
     transition: 0s;
@@ -104,7 +104,7 @@
     }
   }
   .errors-container {
-    margin: 5px 0;
+    margin-top: 5px;
     font-size: 12px;
     color: red;
     transition: height .5s ease-in-out;
@@ -114,6 +114,9 @@
   }
   .form-notifications-container {
     display: flex;
+    .checkbox-wrapper {
+      display: flex;
+    }
     input[type="checkbox"] {
     }
     p {
@@ -141,14 +144,11 @@
     margin: 0;
     transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out,opacity .25s ease-in-out,border-color .25s ease-in-out,color .25s ease-in-out;
     margin-top: 10px;
-    // &:hover {
-    //   opacity: 0.5;
-    // }
   }
 }
 
 // Tablet Portrait and Landscape
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+@media only screen and (min-device-width : 768px) {
   .layout {
     min-height: 100vh;
     transition: 0s;
@@ -216,7 +216,6 @@
       flex-direction: row;
       flex: 1 1 70%;
       padding: 0;
-      text-align: center;
     }
     .input-wrapper {
       display: inline-block;
@@ -244,7 +243,6 @@
       font-weight: normal;
       font-size: 24px;
       line-height: 32px;
-      // font-family: Azo Sans,sans-serif;
       border-radius: 4px;
       outline: none;
       transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out;
@@ -281,7 +279,6 @@
     justify-content: center;
     align-items: center;
 
-    margin-left: 50px;
     input[type="checkbox"] {
     }
     p {
@@ -312,9 +309,6 @@
     transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out,opacity .25s ease-in-out,border-color .25s ease-in-out,color .25s ease-in-out;
     margin-top: 10px;
     margin-bottom: 10px;
-    // &:hover {
-    //   opacity: 0.5;
-    // }
   }
 }
 
@@ -387,7 +381,7 @@
       flex-direction: row;
       flex: 1 1 60%;
       padding: 0;
-      // text-align: center;
+      text-align: left;
     }
     .input-wrapper {
       display: inline-block;
@@ -437,7 +431,7 @@
     }
   }
   .errors-container {
-    margin: 5px 0;
+    margin: 5px;
     font-size: 12px;
     color: red;
     li {
@@ -449,6 +443,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    text-align: left;
     // align-items: center;
 
     // margin-left: 35px;
@@ -485,8 +480,5 @@
     transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out,opacity .25s ease-in-out,border-color .25s ease-in-out,color .25s ease-in-out;
     margin-top: 10px;
     margin-bottom: 10px;
-    // &:hover {
-    //   opacity: 0.5;
-    // }
   }
 }
