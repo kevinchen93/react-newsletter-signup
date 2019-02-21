@@ -241,6 +241,9 @@
         opacity: 0.4;
       }
     }
+    .postSubmitMessage-container {
+      text-align: center;
+    }
     .success-message {
       margin-bottom: 20px;
       color: #94aebf;
@@ -407,6 +410,7 @@
       font-size: 24px;
       line-height: 30px;
       font-weight: bold;
+      text-align: left;
     }
     .first-name {
       margin-right: 10px;
