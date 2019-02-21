@@ -323,7 +323,7 @@
   }
   .newsletter-header {
     position: relative;
-    flex: 2 1 35%;
+    flex: 1 1 50%;
     .newsletter-title {
       position: relative;
       color: #b6fdbf;
@@ -403,6 +403,9 @@
         color: #94aebf;
         opacity: 0.4;
       }
+    }
+    .postSubmitMessage-container {
+      text-align: left;
     }
     .success-message {
       margin-bottom: 20px;

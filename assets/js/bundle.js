@@ -177,11 +177,10 @@ var Root = function Root() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SignupForm; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -199,12 +198,14 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 var SignupForm =
 /*#__PURE__*/
-function (_React$Component) {
-  _inherits(SignupForm, _React$Component);
+function (_Component) {
+  _inherits(SignupForm, _Component);
 
   function SignupForm(props) {
     var _this;
@@ -212,6 +213,77 @@ function (_React$Component) {
     _classCallCheck(this, SignupForm);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SignupForm).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "update", function (field) {
+      return function (e) {
+        return _this.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "validateEmail", function (e) {
+      e.preventDefault();
+      var email = _this.state.email;
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var isEmailValid = re.test(String(email));
+      var errors = [];
+      var errorMessages = {
+        'blankEmail': 'Email cannot be blank.',
+        'invalidEmail': 'Please enter a valid email.'
+      };
+
+      if (!isEmailValid) {
+        if (!email) {
+          errors.push("".concat(errorMessages['blankEmail']));
+        } else {
+          errors.push("".concat(errorMessages['invalidEmail']));
+        }
+      }
+
+      _this.setState({
+        isEmailValid: isEmailValid,
+        errors: errors
+      }, function () {
+        console.log('CURRENT STATE AFTER PRESSING NEXT: ', _this.state);
+        console.log('IS EMAIL VALID? ', isEmailValid);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "validateName", function (e) {
+      e.preventDefault();
+      var _this$state = _this.state,
+          firstName = _this$state.firstName,
+          lastName = _this$state.lastName;
+      var re = /[A-Z]/i;
+      var isNameValid = re.test(String(firstName)) && re.test(String(lastName));
+      var errors = [];
+      var errorMessages = {
+        'firstName': 'First name cannot be blank.',
+        'lastName': 'Last name cannot be blank.',
+        'empty': 'Please enter a first and last name.',
+        'fullName': 'Please enter a valid first and last name.'
+      };
+
+      if (!isNameValid) {
+        if (!firstName && !lastName) {
+          errors.push("".concat(errorMessages['empty']));
+        } else if (!firstName) {
+          errors.push("".concat(errorMessages['firstName']));
+        } else if (!lastName) {
+          errors.push("".concat(errorMessages['lastName']));
+        } else {
+          errors.push("".concat(errorMessages['fullName']));
+        }
+      }
+
+      _this.setState({
+        isNameValid: isNameValid,
+        errors: errors
+      }, function () {
+        console.log('CURRENT STATE AFTER PRESSING SIGN UP: ', _this.state);
+        console.log('IS NAME VALID? ', isNameValid);
+      });
+    });
+
     _this.state = {
       firstName: '',
       lastName: '',
@@ -221,93 +293,16 @@ function (_React$Component) {
       isNameValid: false,
       isLoading: false
     };
-    _this.update = _this.update.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.validateEmail = _this.validateEmail.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.validateName = _this.validateName.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(SignupForm, [{
-    key: "update",
-    value: function update(field) {
-      var _this2 = this;
-
-      return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
-      };
-    }
-  }, {
-    key: "validateEmail",
-    value: function validateEmail(e) {
-      var _this3 = this;
-
-      e.preventDefault();
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      var isEmailValid = re.test(String(this.state.email));
-      var errors = [];
-      var errorMessages = {
-        'blankEmail': '*Email cannot be blank.',
-        'invalidEmail': '*Please enter a valid email.'
-      };
-
-      if (!isEmailValid) {
-        if (this.state.email.length === 0) {
-          errors.push("".concat(errorMessages['blankEmail']));
-        } else {
-          errors.push("".concat(errorMessages['invalidEmail']));
-        }
-      }
-
-      this.setState({
-        isEmailValid: isEmailValid,
-        errors: errors
-      }, function () {
-        console.log('CURRENT STATE AFTER PRESSING NEXT: ', _this3.state);
-        console.log('IS EMAIL VALID? ', isEmailValid);
-      });
-    }
-  }, {
-    key: "validateName",
-    value: function validateName(e) {
-      var _this4 = this;
-
-      e.preventDefault();
-      var re = /[A-Z]/i;
-      var isNameValid = re.test(String(this.state.firstName)) && re.test(String(this.state.lastName));
-      var errors = [];
-      var errorMessages = {
-        'firstName': '*First name cannot be blank.',
-        'lastName': '*Last name cannot be blank.',
-        'empty': '*Please enter a first and last name.',
-        'fullName': '*Please enter a valid first and last name.'
-      };
-
-      if (!isNameValid) {
-        if (this.state.firstName.length === 0 && this.state.lastName.length === 0) {
-          errors.push("".concat(errorMessages['empty']));
-        } else if (this.state.firstName.length === 0) {
-          errors.push("".concat(errorMessages['firstName']));
-        } else if (this.state.lastName.length === 0) {
-          errors.push("".concat(errorMessages['lastName']));
-        } else {
-          errors.push("".concat(errorMessages['fullName']));
-        }
-      }
-
-      this.setState({
-        isNameValid: isNameValid,
-        errors: errors
-      }, function () {
-        console.log('CURRENT STATE AFTER PRESSING SIGN UP: ', _this4.state);
-        console.log('IS NAME VALID? ', isNameValid);
-      });
-    }
-  }, {
     key: "renderHeader",
     value: function renderHeader() {
-      // depending on state, renders header text
-      var title = !this.state.isEmailValid || !this.state.isNameValid ? 'Join the list' : 'congratulations!';
+      var _this$state2 = this.state,
+          isEmailValid = _this$state2.isEmailValid,
+          isNameValid = _this$state2.isNameValid;
+      var title = !isEmailValid || !isNameValid ? 'Join the list' : 'congratulations!';
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "newsletter-header"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
@@ -317,11 +312,14 @@ function (_React$Component) {
   }, {
     key: "renderSubtitle",
     value: function renderSubtitle() {
+      var _this$state3 = this.state,
+          isEmailValid = _this$state3.isEmailValid,
+          isNameValid = _this$state3.isNameValid;
       var subtitleMessages = {
         'invalidEmail': "".concat('Sign up for the TLC Newsletter'.toUpperCase()),
         'invalidName': "".concat('Almost done! Please enter your first and last name.'.toUpperCase())
       };
-      var subtitle = !this.state.isEmailValid && !this.state.isNameValid ? subtitleMessages['invalidEmail'] : this.state.isEmailValid && !this.state.isNameValid ? subtitleMessages['invalidName'] : '';
+      var subtitle = !isEmailValid && !isNameValid ? subtitleMessages['invalidEmail'] : isEmailValid && !isNameValid ? subtitleMessages['invalidName'] : '';
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "newsletter-subtitle"
       }, subtitle);
@@ -329,26 +327,31 @@ function (_React$Component) {
   }, {
     key: "renderInputs",
     value: function renderInputs() {
-      // depending on state, renders either email input or first/last name inputs
-      var inputElements = !this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      var _this$state4 = this.state,
+          email = _this$state4.email,
+          firstName = _this$state4.firstName,
+          lastName = _this$state4.lastName,
+          isEmailValid = _this$state4.isEmailValid,
+          isNameValid = _this$state4.isNameValid;
+      var inputElements = !isEmailValid && !isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        value: this.state.email,
+        value: email,
         onChange: this.update('email'),
         className: "",
         placeholder: "enter email address"
-      })) : this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })) : isEmailValid && !isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        value: this.state.firstName,
+        value: firstName,
         onChange: this.update('firstName'),
         className: "first-name",
         placeholder: "First Name"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        value: this.state.lastName,
+        value: lastName,
         onChange: this.update('lastName'),
         className: "last-name",
         placeholder: "Last Name"
@@ -360,21 +363,15 @@ function (_React$Component) {
   }, {
     key: "renderButton",
     value: function renderButton() {
-      if (this.state.loading) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PulseLoader, {
-          className: "loading-dots",
-          sizeUnit: "px",
-          size: 12,
-          color: '#008489'
-        });
-      }
-
-      return !this.state.isEmailValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      var _this$state5 = this.state,
+          isEmailValid = _this$state5.isEmailValid,
+          isNameValid = _this$state5.isNameValid;
+      return !isEmailValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         value: "NEXT",
         onClick: this.validateEmail,
         className: "btn-submit"
-      }) : this.state.isEmailValid && !this.state.isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }) : isEmailValid && !isNameValid ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         value: "SIGN UP",
         onClick: this.validateName,
@@ -387,7 +384,9 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.state.errors.map(function (error, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: "error-".concat(i)
-        }, error);
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-exclamation-triangle"
+        }), " ", error);
       }));
     }
   }, {
@@ -399,8 +398,11 @@ function (_React$Component) {
   }, {
     key: "renderPostSubmitMessage",
     value: function renderPostSubmitMessage() {
-      if (this.state.isEmailValid && this.state.isNameValid) {
-        console.log('SUBMIT CLICKED');
+      var _this$state6 = this.state,
+          isEmailValid = _this$state6.isEmailValid,
+          isNameValid = _this$state6.isNameValid;
+
+      if (isEmailValid && isNameValid) {
         console.log('CONGRATULATIONS');
         console.log('THIS.STATE (submitted): ', this.state);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -417,6 +419,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var isEmailValid = this.state.isEmailValid;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "newsletter-container"
       }, this.renderHeader(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -430,7 +433,7 @@ function (_React$Component) {
         className: "form-action-wrapper"
       }, this.renderButton()), this.renderPostSubmitMessage())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "errors-container"
-      }, this.renderErrors()), !this.state.isEmailValid && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.renderErrors()), !isEmailValid && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "rela-inline form-notifications-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "checkbox-wrapper"
@@ -450,9 +453,9 @@ function (_React$Component) {
   }]);
 
   return SignupForm;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (SignupForm);
+
 
 /***/ }),
 
@@ -465,7 +468,7 @@ function (_React$Component) {
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "@media only screen and (min-device-width: 320px) {\n  .layout {\n    min-height: 100vh;\n    transition: 0s; }\n  .newsletter-container {\n    width: 100%;\n    max-width: 520px;\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    box-sizing: border-box;\n    margin-left: auto;\n    margin-right: auto;\n    padding: 40px;\n    z-index: 1; }\n  .newsletter-header {\n    position: relative;\n    flex-basis: auto; }\n    .newsletter-header .newsletter-title {\n      position: relative;\n      margin: 10px 0;\n      color: #b6fdbf;\n      font-size: 36px;\n      line-height: 59px;\n      text-align: center; }\n  .newsletter-content {\n    position: relative;\n    color: #94aebf;\n    flex-basis: auto; }\n  .newsletter-subtitle {\n    text-align: center;\n    margin-bottom: 12px;\n    padding: 0 7px;\n    color: #94aebf;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 20px; }\n  .newsletter-subtext {\n    margin-bottom: 10px;\n    text-align: center;\n    color: #94aebf;\n    font-size: 18px;\n    font-weight: 300;\n    line-height: normal; }\n  .newsletter-form {\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    margin: 0;\n    padding: 0; }\n    .newsletter-form .newsletter-fieldset {\n      position: relative;\n      flex: 1 1 auto;\n      padding: 0;\n      margin-bottom: 10px; }\n    .newsletter-form .input-container {\n      display: flex; }\n    .newsletter-form input[type=\"text\"] {\n      display: block;\n      width: 100%;\n      padding: 6px 12px;\n      color: rgba(148, 174, 191, 0.8);\n      border: 1px solid rgba(255, 255, 255, 0.01);\n      background-color: rgba(255, 255, 255, 0.1);\n      text-align: left;\n      font-weight: normal;\n      font-size: 14px;\n      line-height: 32px;\n      border-radius: 4px;\n      outline: none;\n      transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out; }\n      .newsletter-form input[type=\"text\"]::placeholder {\n        font-family: 'Open Sans', sans-serif;\n        color: #94aebf;\n        opacity: 0.4; }\n    .newsletter-form .success-message {\n      margin-bottom: 20px;\n      color: #94aebf;\n      font-size: 24px;\n      line-height: 30px;\n      font-weight: bold;\n      text-align: center; }\n    .newsletter-form .first-name {\n      margin-right: 10px; }\n  .errors-container {\n    margin-top: 5px;\n    font-size: 12px;\n    color: red;\n    transition: height .5s ease-in-out; }\n    .errors-container li {\n      text-align: left; }\n  .form-notifications-container {\n    display: flex; }\n    .form-notifications-container .checkbox-wrapper {\n      display: flex; }\n    .form-notifications-container p {\n      padding-left: 5px;\n      font-size: 12px;\n      font-weight: 300;\n      line-height: 14px;\n      color: #888888;\n      text-align: left; }\n  .btn-submit {\n    width: 100%;\n    display: block;\n    background: #ed1f34;\n    cursor: pointer;\n    border: 1px solid #ed1f34;\n    box-shadow: 0 0 0 transparent;\n    border-radius: 4px;\n    padding: 8px 14px;\n    color: #fff;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 20px;\n    transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out,opacity .25s ease-in-out,border-color .25s ease-in-out,color .25s ease-in-out;\n    margin: 0;\n    margin-top: 10px; } }\n\n@media only screen and (min-device-width: 768px) {\n  .layout {\n    min-height: 100vh;\n    transition: 0s; }\n  .newsletter-container {\n    width: auto;\n    max-width: 9999em;\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    box-sizing: border-box;\n    margin-left: auto;\n    margin-right: auto;\n    padding: 40px 80px;\n    z-index: 1; }\n  .newsletter-header {\n    position: relative;\n    flex: 1 1 auto; }\n    .newsletter-header .newsletter-title {\n      color: #b6fdbf;\n      font-size: 50px;\n      line-height: 60px;\n      position: relative;\n      margin: 0 0 10px;\n      text-align: center; }\n  .newsletter-content {\n    position: relative;\n    color: #94aebf;\n    flex: 1 1 auto; }\n  .newsletter-subtitle {\n    padding: 0 7px;\n    color: #94aebf;\n    font-size: 20px;\n    font-weight: bold;\n    line-height: 30px;\n    text-align: center;\n    margin-bottom: 11px; }\n  .newsletter-subtext {\n    color: #94aebf;\n    font-size: 18px;\n    font-weight: 300;\n    line-height: normal;\n    margin-bottom: 10px;\n    text-align: center; }\n  .newsletter-form {\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    margin: 0;\n    padding: 0; }\n    .newsletter-form .newsletter-fieldset {\n      position: relative;\n      margin-bottom: 10px;\n      flex-direction: row;\n      padding: 0;\n      flex: 1 1 70%; }\n    .newsletter-form .input-wrapper {\n      display: inline-block;\n      width: 63%;\n      flex: 1;\n      margin-right: 20px; }\n      .newsletter-form .input-wrapper .input-container {\n        display: flex;\n        flex: 1 1 auto; }\n    .newsletter-form .form-action-wrapper {\n      display: inline-block;\n      width: 25%;\n      flex: 1; }\n    .newsletter-form input[type=\"text\"] {\n      display: block;\n      width: 100%;\n      padding: 6px 12px;\n      color: rgba(148, 174, 191, 0.8);\n      border: 1px solid rgba(255, 255, 255, 0.01);\n      background-color: rgba(255, 255, 255, 0.1);\n      text-align: left;\n      font-weight: normal;\n      font-size: 24px;\n      line-height: 32px;\n      border-radius: 4px;\n      outline: none;\n      transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out; }\n      .newsletter-form input[type=\"text\"]::placeholder {\n        font-family: 'Open Sans', sans-serif;\n        color: #94aebf;\n        opacity: 0.4; }\n    .newsletter-form .success-message {\n      margin-bottom: 20px;\n      color: #94aebf;\n      font-size: 24px;\n      line-height: 30px;\n      font-weight: bold;\n      text-align: center; }\n    .newsletter-form .first-name {\n      margin-right: 10px; }\n  .errors-container {\n    margin: 5px 0;\n    font-size: 12px;\n    color: red;\n    transition: height .5s ease-in-out; }\n    .errors-container li {\n      text-align: left; }\n  .form-notifications-container {\n    width: 60%;\n    display: flex;\n    justify-content: center;\n    align-items: center; }\n    .form-notifications-container p {\n      font-weight: 300;\n      padding-left: 5px;\n      font-size: 12px;\n      line-height: 14px;\n      color: #888888;\n      text-align: left; }\n  .btn-submit {\n    width: auto;\n    min-width: 180px;\n    max-width: 100%;\n    display: block;\n    background: #ed1f34;\n    cursor: pointer;\n    border: 1px solid #ed1f34;\n    box-shadow: 0 0 0 transparent;\n    border-radius: 4px;\n    padding: 13px 14px;\n    color: #fff;\n    font-size: 20px;\n    font-weight: bold;\n    line-height: 32px;\n    margin: 0;\n    transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out,opacity .25s ease-in-out,border-color .25s ease-in-out,color .25s ease-in-out;\n    margin-top: 10px; } }\n\n@media only screen and (min-device-width: 1224px) {\n  .layout {\n    min-height: 100vh;\n    transition: 0s; }\n  .newsletter-container {\n    width: auto;\n    max-width: 9999em;\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    box-sizing: border-box;\n    margin-left: auto;\n    margin-right: auto;\n    padding: 40px 80px;\n    z-index: 1; }\n  .newsletter-header {\n    position: relative;\n    flex: 2 1 35%; }\n    .newsletter-header .newsletter-title {\n      position: relative;\n      color: #b6fdbf;\n      font-size: 50px;\n      line-height: 60px;\n      margin: 40px 20px 40px 0;\n      text-align: right; }\n  .newsletter-content {\n    position: relative;\n    color: #94aebf;\n    flex: 1 1 65%; }\n  .newsletter-subtitle {\n    padding: 0 7px;\n    text-align: left;\n    margin-bottom: 5px;\n    color: #94aebf;\n    font-size: 24px;\n    font-weight: bold;\n    line-height: 30px; }\n  .newsletter-subtext {\n    margin-bottom: 10px;\n    text-align: center;\n    color: #94aebf;\n    font-size: 18px;\n    font-weight: 300;\n    line-height: normal; }\n  .newsletter-form {\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    margin: 0;\n    padding: 0; }\n    .newsletter-form .newsletter-fieldset {\n      position: relative;\n      flex-direction: row;\n      flex: 1 1 60%;\n      margin-bottom: 10px;\n      padding: 0;\n      text-align: left; }\n    .newsletter-form .input-wrapper {\n      display: inline-block;\n      width: 63%;\n      flex: 1;\n      margin-right: 20px; }\n      .newsletter-form .input-wrapper .input-container {\n        display: flex;\n        flex: 1 1 auto; }\n    .newsletter-form .form-action-wrapper {\n      display: inline-block;\n      width: 25%;\n      flex: 1; }\n    .newsletter-form input[type=\"text\"] {\n      display: block;\n      width: 100%;\n      padding: 6px 12px;\n      color: rgba(148, 174, 191, 0.8);\n      border: 1px solid rgba(255, 255, 255, 0.01);\n      background-color: rgba(255, 255, 255, 0.1);\n      text-align: left;\n      font-weight: normal;\n      font-size: 24px;\n      line-height: 32px;\n      border-radius: 4px;\n      outline: none;\n      transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out; }\n      .newsletter-form input[type=\"text\"]::placeholder {\n        font-family: 'Open Sans', sans-serif;\n        color: #94aebf;\n        opacity: 0.4; }\n    .newsletter-form .success-message {\n      margin-bottom: 20px;\n      color: #94aebf;\n      font-size: 24px;\n      line-height: 30px;\n      font-weight: bold; }\n    .newsletter-form .first-name {\n      margin-right: 10px; }\n  .errors-container {\n    margin: 5px;\n    font-size: 12px;\n    color: red; }\n    .errors-container li {\n      text-align: left; }\n  .form-notifications-container {\n    width: 60%;\n    display: flex;\n    justify-content: center;\n    flex-direction: column;\n    text-align: left; }\n    .form-notifications-container p {\n      font-weight: 300;\n      padding-left: 5px;\n      font-size: 12px;\n      line-height: 14px;\n      color: #888888;\n      text-align: left; }\n    .form-notifications-container .checkbox-wrapper {\n      display: flex; }\n  .btn-submit {\n    width: auto;\n    min-width: 180px;\n    max-width: 100%;\n    display: block;\n    background: #ed1f34;\n    cursor: pointer;\n    border: 1px solid #ed1f34;\n    box-shadow: 0 0 0 transparent;\n    border-radius: 4px;\n    padding: 13px 14px;\n    color: #fff;\n    font-size: 20px;\n    font-weight: bold;\n    line-height: 32px;\n    transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out,opacity .25s ease-in-out,border-color .25s ease-in-out,color .25s ease-in-out;\n    margin: 0;\n    margin-top: 10px; } }\n", ""]);
+exports.push([module.i, "@media only screen and (min-device-width: 320px) {\n  .layout {\n    min-height: 100vh;\n    transition: 0s; }\n  .newsletter-container {\n    width: 100%;\n    max-width: 520px;\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    box-sizing: border-box;\n    margin-left: auto;\n    margin-right: auto;\n    padding: 40px;\n    z-index: 1; }\n  .newsletter-header {\n    position: relative;\n    flex-basis: auto; }\n    .newsletter-header .newsletter-title {\n      position: relative;\n      margin: 10px 0;\n      color: #b6fdbf;\n      font-size: 36px;\n      line-height: 59px;\n      text-align: center; }\n  .newsletter-content {\n    position: relative;\n    color: #94aebf;\n    flex-basis: auto; }\n  .newsletter-subtitle {\n    text-align: center;\n    margin-bottom: 12px;\n    padding: 0 7px;\n    color: #94aebf;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 20px; }\n  .newsletter-subtext {\n    margin-bottom: 10px;\n    text-align: center;\n    color: #94aebf;\n    font-size: 18px;\n    font-weight: 300;\n    line-height: normal; }\n  .newsletter-form {\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    margin: 0;\n    padding: 0; }\n    .newsletter-form .newsletter-fieldset {\n      position: relative;\n      flex: 1 1 auto;\n      padding: 0;\n      margin-bottom: 10px; }\n    .newsletter-form .input-container {\n      display: flex; }\n    .newsletter-form input[type=\"text\"] {\n      display: block;\n      width: 100%;\n      padding: 6px 12px;\n      color: rgba(148, 174, 191, 0.8);\n      border: 1px solid rgba(255, 255, 255, 0.01);\n      background-color: rgba(255, 255, 255, 0.1);\n      text-align: left;\n      font-weight: normal;\n      font-size: 14px;\n      line-height: 32px;\n      border-radius: 4px;\n      outline: none;\n      transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out; }\n      .newsletter-form input[type=\"text\"]::placeholder {\n        font-family: 'Open Sans', sans-serif;\n        color: #94aebf;\n        opacity: 0.4; }\n    .newsletter-form .success-message {\n      margin-bottom: 20px;\n      color: #94aebf;\n      font-size: 24px;\n      line-height: 30px;\n      font-weight: bold;\n      text-align: center; }\n    .newsletter-form .first-name {\n      margin-right: 10px; }\n  .errors-container {\n    margin-top: 5px;\n    font-size: 12px;\n    color: red;\n    transition: height .5s ease-in-out; }\n    .errors-container li {\n      text-align: left; }\n  .form-notifications-container {\n    display: flex; }\n    .form-notifications-container .checkbox-wrapper {\n      display: flex; }\n    .form-notifications-container p {\n      padding-left: 5px;\n      font-size: 12px;\n      font-weight: 300;\n      line-height: 14px;\n      color: #888888;\n      text-align: left; }\n  .btn-submit {\n    width: 100%;\n    display: block;\n    background: #ed1f34;\n    cursor: pointer;\n    border: 1px solid #ed1f34;\n    box-shadow: 0 0 0 transparent;\n    border-radius: 4px;\n    padding: 8px 14px;\n    color: #fff;\n    font-size: 16px;\n    font-weight: bold;\n    line-height: 20px;\n    transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out,opacity .25s ease-in-out,border-color .25s ease-in-out,color .25s ease-in-out;\n    margin: 0;\n    margin-top: 10px; } }\n\n@media only screen and (min-device-width: 768px) {\n  .layout {\n    min-height: 100vh;\n    transition: 0s; }\n  .newsletter-container {\n    width: auto;\n    max-width: 9999em;\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    box-sizing: border-box;\n    margin-left: auto;\n    margin-right: auto;\n    padding: 40px 80px;\n    z-index: 1; }\n  .newsletter-header {\n    position: relative;\n    flex: 1 1 auto; }\n    .newsletter-header .newsletter-title {\n      color: #b6fdbf;\n      font-size: 50px;\n      line-height: 60px;\n      position: relative;\n      margin: 0 0 10px;\n      text-align: center; }\n  .newsletter-content {\n    position: relative;\n    color: #94aebf;\n    flex: 1 1 auto; }\n  .newsletter-subtitle {\n    padding: 0 7px;\n    color: #94aebf;\n    font-size: 20px;\n    font-weight: bold;\n    line-height: 30px;\n    text-align: center;\n    margin-bottom: 11px; }\n  .newsletter-subtext {\n    color: #94aebf;\n    font-size: 18px;\n    font-weight: 300;\n    line-height: normal;\n    margin-bottom: 10px;\n    text-align: center; }\n  .newsletter-form {\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    margin: 0;\n    padding: 0; }\n    .newsletter-form .newsletter-fieldset {\n      position: relative;\n      margin-bottom: 10px;\n      flex-direction: row;\n      padding: 0;\n      flex: 1 1 70%; }\n    .newsletter-form .input-wrapper {\n      display: inline-block;\n      width: 63%;\n      flex: 1;\n      margin-right: 20px; }\n      .newsletter-form .input-wrapper .input-container {\n        display: flex;\n        flex: 1 1 auto; }\n    .newsletter-form .form-action-wrapper {\n      display: inline-block;\n      width: 25%;\n      flex: 1; }\n    .newsletter-form input[type=\"text\"] {\n      display: block;\n      width: 100%;\n      padding: 6px 12px;\n      color: rgba(148, 174, 191, 0.8);\n      border: 1px solid rgba(255, 255, 255, 0.01);\n      background-color: rgba(255, 255, 255, 0.1);\n      text-align: left;\n      font-weight: normal;\n      font-size: 24px;\n      line-height: 32px;\n      border-radius: 4px;\n      outline: none;\n      transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out; }\n      .newsletter-form input[type=\"text\"]::placeholder {\n        font-family: 'Open Sans', sans-serif;\n        color: #94aebf;\n        opacity: 0.4; }\n    .newsletter-form .postSubmitMessage-container {\n      text-align: center; }\n    .newsletter-form .success-message {\n      margin-bottom: 20px;\n      color: #94aebf;\n      font-size: 24px;\n      line-height: 30px;\n      font-weight: bold;\n      text-align: center; }\n    .newsletter-form .first-name {\n      margin-right: 10px; }\n  .errors-container {\n    margin: 5px 0;\n    font-size: 12px;\n    color: red;\n    transition: height .5s ease-in-out; }\n    .errors-container li {\n      text-align: left; }\n  .form-notifications-container {\n    width: 60%;\n    display: flex;\n    justify-content: center;\n    align-items: center; }\n    .form-notifications-container p {\n      font-weight: 300;\n      padding-left: 5px;\n      font-size: 12px;\n      line-height: 14px;\n      color: #888888;\n      text-align: left; }\n  .btn-submit {\n    width: auto;\n    min-width: 180px;\n    max-width: 100%;\n    display: block;\n    background: #ed1f34;\n    cursor: pointer;\n    border: 1px solid #ed1f34;\n    box-shadow: 0 0 0 transparent;\n    border-radius: 4px;\n    padding: 13px 14px;\n    color: #fff;\n    font-size: 20px;\n    font-weight: bold;\n    line-height: 32px;\n    margin: 0;\n    transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out,opacity .25s ease-in-out,border-color .25s ease-in-out,color .25s ease-in-out;\n    margin-top: 10px; } }\n\n@media only screen and (min-device-width: 1224px) {\n  .layout {\n    min-height: 100vh;\n    transition: 0s; }\n  .newsletter-container {\n    width: auto;\n    max-width: 9999em;\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    box-sizing: border-box;\n    margin-left: auto;\n    margin-right: auto;\n    padding: 40px 80px;\n    z-index: 1; }\n  .newsletter-header {\n    position: relative;\n    flex: 1 1 50%; }\n    .newsletter-header .newsletter-title {\n      position: relative;\n      color: #b6fdbf;\n      font-size: 50px;\n      line-height: 60px;\n      margin: 40px 20px 40px 0;\n      text-align: right; }\n  .newsletter-content {\n    position: relative;\n    color: #94aebf;\n    flex: 1 1 65%; }\n  .newsletter-subtitle {\n    padding: 0 7px;\n    text-align: left;\n    margin-bottom: 5px;\n    color: #94aebf;\n    font-size: 24px;\n    font-weight: bold;\n    line-height: 30px; }\n  .newsletter-subtext {\n    margin-bottom: 10px;\n    text-align: center;\n    color: #94aebf;\n    font-size: 18px;\n    font-weight: 300;\n    line-height: normal; }\n  .newsletter-form {\n    position: relative;\n    display: flex;\n    flex-direction: column;\n    margin: 0;\n    padding: 0; }\n    .newsletter-form .newsletter-fieldset {\n      position: relative;\n      flex-direction: row;\n      flex: 1 1 60%;\n      margin-bottom: 10px;\n      padding: 0;\n      text-align: left; }\n    .newsletter-form .input-wrapper {\n      display: inline-block;\n      width: 63%;\n      flex: 1;\n      margin-right: 20px; }\n      .newsletter-form .input-wrapper .input-container {\n        display: flex;\n        flex: 1 1 auto; }\n    .newsletter-form .form-action-wrapper {\n      display: inline-block;\n      width: 25%;\n      flex: 1; }\n    .newsletter-form input[type=\"text\"] {\n      display: block;\n      width: 100%;\n      padding: 6px 12px;\n      color: rgba(148, 174, 191, 0.8);\n      border: 1px solid rgba(255, 255, 255, 0.01);\n      background-color: rgba(255, 255, 255, 0.1);\n      text-align: left;\n      font-weight: normal;\n      font-size: 24px;\n      line-height: 32px;\n      border-radius: 4px;\n      outline: none;\n      transition: background-color .15s ease-in-out,color .15s ease-in-out,border-color .15s ease-in-out; }\n      .newsletter-form input[type=\"text\"]::placeholder {\n        font-family: 'Open Sans', sans-serif;\n        color: #94aebf;\n        opacity: 0.4; }\n    .newsletter-form .postSubmitMessage-container {\n      text-align: left; }\n    .newsletter-form .success-message {\n      margin-bottom: 20px;\n      color: #94aebf;\n      font-size: 24px;\n      line-height: 30px;\n      font-weight: bold;\n      text-align: left; }\n    .newsletter-form .first-name {\n      margin-right: 10px; }\n  .errors-container {\n    margin: 5px;\n    font-size: 12px;\n    color: red; }\n    .errors-container li {\n      text-align: left; }\n  .form-notifications-container {\n    width: 60%;\n    display: flex;\n    justify-content: center;\n    flex-direction: column;\n    text-align: left; }\n    .form-notifications-container p {\n      font-weight: 300;\n      padding-left: 5px;\n      font-size: 12px;\n      line-height: 14px;\n      color: #888888;\n      text-align: left; }\n    .form-notifications-container .checkbox-wrapper {\n      display: flex; }\n  .btn-submit {\n    width: auto;\n    min-width: 180px;\n    max-width: 100%;\n    display: block;\n    background: #ed1f34;\n    cursor: pointer;\n    border: 1px solid #ed1f34;\n    box-shadow: 0 0 0 transparent;\n    border-radius: 4px;\n    padding: 13px 14px;\n    color: #fff;\n    font-size: 20px;\n    font-weight: bold;\n    line-height: 32px;\n    transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out,opacity .25s ease-in-out,border-color .25s ease-in-out,color .25s ease-in-out;\n    margin: 0;\n    margin-top: 10px; } }\n", ""]);
 
 
 

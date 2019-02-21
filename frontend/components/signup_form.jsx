@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class SignupForm extends React.Component {
+export default class SignupForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,30 +12,26 @@ class SignupForm extends React.Component {
       isNameValid: false,
       isLoading: false
     };
-
-    this.update = this.update.bind(this);
-    this.validateEmail = this.validateEmail.bind(this);
-    this.validateName = this.validateName.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  update(field) {
+  update = (field) => {
     return e => this.setState({
       [field]: e.currentTarget.value
     });
   }
 
-  validateEmail(e) {
+  validateEmail = (e) => {
     e.preventDefault();
+    const { email } = this.state;
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const isEmailValid = re.test(String(this.state.email));
+    const isEmailValid = re.test(String(email));
     const errors = [];
     const errorMessages = {
-      'blankEmail': '*Email cannot be blank.',
-      'invalidEmail': '*Please enter a valid email.'
+      'blankEmail': 'Email cannot be blank.',
+      'invalidEmail': 'Please enter a valid email.'
     }
     if (!isEmailValid) {
-      if (this.state.email.length === 0) {
+      if (!email) {
         errors.push(`${errorMessages['blankEmail']}`);
       } else {
         errors.push(`${errorMessages['invalidEmail']}`);
@@ -43,7 +39,7 @@ class SignupForm extends React.Component {
     }
 
     this.setState(
-      { isEmailValid: isEmailValid, errors: errors},
+      { isEmailValid, errors },
       () => {
         console.log('CURRENT STATE AFTER PRESSING NEXT: ', this.state);
         console.log('IS EMAIL VALID? ', isEmailValid);
@@ -51,24 +47,25 @@ class SignupForm extends React.Component {
     );
   }
 
-  validateName(e) {
+  validateName = (e) => {
     e.preventDefault();
+    const { firstName, lastName } = this.state;
     const re = /[A-Z]/i;
-    const isNameValid = re.test(String(this.state.firstName)) && re.test(String(this.state.lastName));
+    const isNameValid = re.test(String(firstName)) && re.test(String(lastName));
     const errors = [];
     const errorMessages = {
-      'firstName': '*First name cannot be blank.',
-      'lastName': '*Last name cannot be blank.',
-      'empty': '*Please enter a first and last name.',
-      'fullName': '*Please enter a valid first and last name.',
+      'firstName': 'First name cannot be blank.',
+      'lastName': 'Last name cannot be blank.',
+      'empty': 'Please enter a first and last name.',
+      'fullName': 'Please enter a valid first and last name.',
     };
 
     if (!isNameValid) {
-      if (this.state.firstName.length === 0 && this.state.lastName.length === 0) {
+      if (!firstName && !lastName) {
         errors.push(`${errorMessages['empty']}`);
-      } else if (this.state.firstName.length === 0) {
+      } else if (!firstName) {
         errors.push(`${errorMessages['firstName']}`);
-      } else if (this.state.lastName.length === 0){
+      } else if (!lastName){
         errors.push(`${errorMessages['lastName']}`);
       } else {
         errors.push(`${errorMessages['fullName']}`);
@@ -76,7 +73,7 @@ class SignupForm extends React.Component {
     }
 
     this.setState(
-      { isNameValid: isNameValid, errors: errors },
+      { isNameValid, errors },
       () => {
         console.log('CURRENT STATE AFTER PRESSING SIGN UP: ', this.state);
         console.log('IS NAME VALID? ', isNameValid);
@@ -85,8 +82,8 @@ class SignupForm extends React.Component {
   }
 
   renderHeader() {
-    // depending on state, renders header text
-    const title = (!this.state.isEmailValid || !this.state.isNameValid) ? 'Join the list' : 'congratulations!';
+    const { isEmailValid, isNameValid } = this.state
+    const title = (!isEmailValid || !isNameValid) ? 'Join the list' : 'congratulations!';
 
     return (
       <div className="newsletter-header">
@@ -96,13 +93,14 @@ class SignupForm extends React.Component {
   }
 
   renderSubtitle() {
+    const { isEmailValid, isNameValid } = this.state;
     const subtitleMessages = {
       'invalidEmail': `${'Sign up for the TLC Newsletter'.toUpperCase()}`,
       'invalidName': `${'Almost done! Please enter your first and last name.'.toUpperCase()}`
     };
 
-    const subtitle = (!this.state.isEmailValid && !this.state.isNameValid) ? subtitleMessages['invalidEmail']
-    : (this.state.isEmailValid && !this.state.isNameValid) ? subtitleMessages['invalidName']
+    const subtitle = (!isEmailValid && !isNameValid) ? subtitleMessages['invalidEmail']
+    : (isEmailValid && !isNameValid) ? subtitleMessages['invalidName']
     : '';
 
     return (
@@ -111,31 +109,31 @@ class SignupForm extends React.Component {
   }
 
   renderInputs() {
-    // depending on state, renders either email input or first/last name inputs
-    const inputElements = (!this.state.isEmailValid && !this.state.isNameValid) ?
+    const { email, firstName, lastName, isEmailValid, isNameValid } = this.state;
+    const inputElements = (!isEmailValid && !isNameValid) ?
       (
         <div className="input-container">
           <input
             type="text"
-            value={this.state.email}
+            value={email}
             onChange={this.update('email')}
             className=""
             placeholder="enter email address"
             />
         </div>
-      ) : (this.state.isEmailValid && !this.state.isNameValid) ?
+      ) : (isEmailValid && !isNameValid) ?
       (
         <div className="input-container">
             <input
               type="text"
-              value={this.state.firstName}
+              value={firstName}
               onChange={this.update('firstName')}
               className="first-name"
               placeholder="First Name"
               />
             <input
               type="text"
-              value={this.state.lastName}
+              value={lastName}
               onChange={this.update('lastName')}
               className="last-name"
               placeholder="Last Name"
@@ -151,18 +149,8 @@ class SignupForm extends React.Component {
   }
 
   renderButton() {
-    if (this.state.loading) {
-      return (
-          <PulseLoader
-        className="loading-dots"
-        sizeUnit={"px"}
-        size={12}
-        color={'#008489'}
-      />
-
-      )
-    }
-    return (!this.state.isEmailValid) ?
+    const { isEmailValid, isNameValid } = this.state;
+    return (!isEmailValid) ?
       (
         <input
           type="submit"
@@ -170,7 +158,7 @@ class SignupForm extends React.Component {
           onClick={ this.validateEmail }
           className="btn-submit"
         />
-      ) : (this.state.isEmailValid && !this.state.isNameValid) ?
+      ) : (isEmailValid && !isNameValid) ?
       (
         <input
           type="submit"
@@ -186,7 +174,7 @@ class SignupForm extends React.Component {
       <ul>
         {this.state.errors.map((error, i) => (
           <li key={`error-${i}`}>
-            {error}
+            <i className="fas fa-exclamation-triangle"></i> {error}
           </li>
         ))}
       </ul>
@@ -199,8 +187,8 @@ class SignupForm extends React.Component {
   }
 
   renderPostSubmitMessage() {
-    if (this.state.isEmailValid && this.state.isNameValid) {
-      console.log('SUBMIT CLICKED');
+    const { isEmailValid, isNameValid } = this.state;
+    if (isEmailValid && isNameValid) {
       console.log('CONGRATULATIONS');
       console.log('THIS.STATE (submitted): ', this.state);
 
@@ -216,6 +204,7 @@ class SignupForm extends React.Component {
   }
 
   render() {
+    const { isEmailValid } = this.state;
     return (
       <div className="newsletter-container">
           {this.renderHeader()}
@@ -233,7 +222,7 @@ class SignupForm extends React.Component {
             <div className="errors-container">
               {this.renderErrors()}
             </div>
-            {!this.state.isEmailValid &&
+            {!isEmailValid &&
               <div className="rela-inline form-notifications-container">
                 <div className="checkbox-wrapper">
                   <input
@@ -251,5 +240,3 @@ class SignupForm extends React.Component {
     )
   }
 }
-
-export default SignupForm;

@@ -9,6 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run open",
+    "webpack": "webpack --watch --mode=development",
     "open": "concurrently \"http-server -a localhost -p 3000\" \"sleepms 3000 && open http://localhost:3000/\""
   },
   "keywords": [],
@@ -16,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
