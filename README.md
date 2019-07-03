@@ -1,5 +1,5 @@
-# React Signup Newsletter
-A responsive UI component using React to simulate a Newsletter Sign Up with multiple states.  
+# React Newsletter Signup
+A responsive UI component using React to simulate a Newsletter Signup with multiple states.  
 
 [Live!](https://kevinnn.co/allergan-take-home)
 
