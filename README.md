@@ -1,7 +1,7 @@
 # React Newsletter Signup
 A responsive UI component using React to simulate a Newsletter Signup with multiple states.  
 
-[Live!](https://kevinnn.co/allergan-take-home)
+[Live!](https://kevinnn.co/react-newsletter-signup/)
 
 ## Setup
 Navigate to the root directory and install all dependencies
