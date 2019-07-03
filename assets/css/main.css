@@ -39,6 +39,10 @@ input {
 input:focus {
   outline: none;
 }
+.input-container > input:hover {
+  color: hsla(0,0%,100%,.8);
+  background-color: hsla(0,0%,100%,.3);
+}
 input[type="submit"]:hover {
   background-color: #fff;
   border-color: #fff;

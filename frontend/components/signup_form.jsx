@@ -110,14 +110,13 @@ export default class SignupForm extends Component {
 
   renderInputs() {
     const { email, firstName, lastName, isEmailValid, isNameValid } = this.state;
-    const inputElements = (!isEmailValid && !isNameValid) ?
+    const inputElements = (!isEmailValid) ?
       (
         <div className="input-container">
           <input
             type="text"
             value={email}
             onChange={this.update('email')}
-            className=""
             placeholder="enter email address"
             />
         </div>
@@ -130,6 +129,7 @@ export default class SignupForm extends Component {
               onChange={this.update('firstName')}
               className="first-name"
               placeholder="First Name"
+              required
               />
             <input
               type="text"
@@ -137,6 +137,7 @@ export default class SignupForm extends Component {
               onChange={this.update('lastName')}
               className="last-name"
               placeholder="Last Name"
+              required
               />
         </div>
       ) : null;
@@ -152,7 +153,7 @@ export default class SignupForm extends Component {
     const { isEmailValid, isNameValid } = this.state;
     return (!isEmailValid) ?
       (
-        <input
+        <button
           type="submit"
           value="NEXT"
           onClick={ this.validateEmail }
@@ -160,7 +161,7 @@ export default class SignupForm extends Component {
         />
       ) : (isEmailValid && !isNameValid) ?
       (
-        <input
+        <button
           type="submit"
           value="SIGN UP"
           onClick={ this.validateName }
@@ -240,3 +241,7 @@ export default class SignupForm extends Component {
     )
   }
 }
+
+// refactor components
+// change submit input element to button element
+// place required attribute into input fields
