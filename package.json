@@ -30,7 +30,12 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.4",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.2.3",
+    "lodash": ">=4.17.13",
+    "fstream": ">=1.0.12",
+    "tar": ">=2.2.2",
+    "ecstatic": ">=3.3.2",
+    "lodash.mergewith": ">=4.6.2"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
