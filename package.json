@@ -36,7 +36,7 @@
     "lodash": ">=4.17.13",
     "fstream": ">=1.0.12",
     "tar": ">=2.2.2",
-    "ecstatic": ">=3.3.2",
+    "ecstatic": ">=4.1.4",
     "lodash.mergewith": ">=4.6.2"
   },
   "devDependencies": {
