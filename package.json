@@ -29,7 +29,7 @@
     "redux": "^4.0.1",
     "sass": "^1.17.0",
     "sass-loader": "^7.1.0",
-    "set-value": ">=2.0.1",
+    "set-value": ">=4.0.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.4",
     "webpack-cli": "^3.2.3",
